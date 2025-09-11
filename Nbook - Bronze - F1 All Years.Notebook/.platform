@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - F1 All Years"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bc8c5f97-5cb3-9abb-4c32-390cd03f81a8"
+  }
+}
