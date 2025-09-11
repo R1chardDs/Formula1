@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - List Of Races"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5950c011-4001-886e-469a-b5eb41b7bc74"
+  }
+}
