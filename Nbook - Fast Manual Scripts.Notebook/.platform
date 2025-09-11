@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Fast Manual Scripts"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8b09936b-c386-9a43-4c45-da997b4da8df"
+  }
+}

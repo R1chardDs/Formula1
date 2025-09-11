@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - Qualy Results from 2006 onwards "
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3faf1038-7e3f-be35-4290-50205c683647"
+  }
+}

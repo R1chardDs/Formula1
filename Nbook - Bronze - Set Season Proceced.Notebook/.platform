@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - Set Season Proceced"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "079c0302-a6c2-9120-4dd8-46050820d833"
+  }
+}
