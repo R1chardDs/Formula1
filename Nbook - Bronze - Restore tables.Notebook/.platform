@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - Restore tables"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c2471cf3-ea55-9fe0-4bd0-536dc15aa258"
+  }
+}

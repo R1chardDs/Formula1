@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - Races Results All Seasons"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8b0d8720-9fac-a1a5-4175-9aca58cf1c84"
+  }
+}
