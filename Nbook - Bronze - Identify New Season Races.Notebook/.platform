@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Bronze - Identify New Season Races"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0c921923-82d4-895a-4ee1-eacdd2948c2d"
+  }
+}
