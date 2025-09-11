@@ -1,0 +1,31 @@
+{
+  "Runtime": "PYTHON",
+  "FunctionsMetadata": [
+    {
+      "Name": "fetch_html",
+      "ScriptFile": "function_app.py",
+      "Bindings": [
+        {
+          "Methods": [
+            "POST"
+          ],
+          "Route": "",
+          "AuthLevel": "Anonymous",
+          "Name": "req",
+          "Direction": "In",
+          "Type": "HttpTrigger"
+        }
+      ],
+      "FabricProperties": {
+        "fabricFunctionParameters": [
+          {
+            "dataType": "str",
+            "name": "url"
+          }
+        ],
+        "fabricFunctionReturnType": "str",
+        "fabricMetadataSchemaVersion": "1.0.0"
+      }
+    }
+  ]
+}

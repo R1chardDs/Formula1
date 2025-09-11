@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "UserDataFunction",
+    "displayName": "Fx - Fetchhtml"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f8dd989a-b41d-a1f6-4f99-d36c8f4038a0"
+  }
+}

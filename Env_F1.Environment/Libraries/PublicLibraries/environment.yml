@@ -1,0 +1,8 @@
+dependencies:
+  - pip:
+      - office365-rest-python-client==2.6.2
+      - io==0.0.1
+      - bs4==0.0.2
+      - beautifulsoup==3.2.2
+      - datetime==5.5
+      - pyspark==4.0.0
