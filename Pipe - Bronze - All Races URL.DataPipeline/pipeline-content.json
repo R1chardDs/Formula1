@@ -1,0 +1,229 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "type": "LakehouseTable",
+            "typeProperties": {
+              "schema": "dbo",
+              "table": "F1_Years"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "Lake_F1_Test",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "e16981b6-cb70-b645-4d1b-bbf6c8e799e8",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Tables"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "F1 Years",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@activity('Current Season').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "5950c011-4001-886e-469a-b5eb41b7bc74",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@item().year",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.target_zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "List of Races",
+              "dependsOn": []
+            },
+            {
+              "type": "Wait",
+              "typeProperties": {
+                "waitTimeInSeconds": 10
+              },
+              "name": "Wait 10 segs",
+              "dependsOn": [
+                {
+                  "activity": "List of Races",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "0c921923-82d4-895a-4ee1-eacdd2948c2d",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@item().year",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.target_zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Identify New Races",
+              "dependsOn": [
+                {
+                  "activity": "Wait 10 segs",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "name": "ForEach1",
+        "dependsOn": [
+          {
+            "activity": "Current Season",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Filter",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('F1 Years').output.value",
+            "type": "Expression"
+          },
+          "condition": {
+            "value": "@equals(item().IsCurrentSeason,'Y')",
+            "type": "Expression"
+          }
+        },
+        "name": "Current Season",
+        "dependsOn": [
+          {
+            "activity": "F1 Years",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 10
+        },
+        "name": "Wait 10 segs 2",
+        "dependsOn": [
+          {
+            "activity": "ForEach1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {
+            "Zone": {
+              "value": "@pipeline().parameters.target_zone",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": false,
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "pipelineId": "2614062b-ad22-8472-4d40-24aa151b61bd",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "35926c5a-2500-448c-9b2f-d6a5884c7352"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke pipeline1",
+        "dependsOn": [
+          {
+            "activity": "Wait 10 segs 2",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "target_zone": {
+        "type": "string",
+        "defaultValue": "Bronze"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Bronze - All Races URL"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c750ab46-7b04-a727-4aab-b3e1b4f43d25"
+  }
+}
