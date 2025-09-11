@@ -1,0 +1,514 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "type": "LakehouseTable",
+            "typeProperties": {
+              "schema": "dbo",
+              "table": "F1_Years"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "Lake_F1_Bronze",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "282da182-3980-97c6-4d87-d47ccbf6d77c",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Tables"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "F1_Years",
+        "dependsOn": []
+      },
+      {
+        "type": "Filter",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('F1_Years').output.value",
+            "type": "Expression"
+          },
+          "condition": {
+            "value": "@equals(item().IsCurrentSeason,'Y')",
+            "type": "Expression"
+          }
+        },
+        "name": "Filter Current Season",
+        "dependsOn": [
+          {
+            "activity": "F1_Years",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@activity('Filter Current Season').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "8b0d8720-9fac-a1a5-4175-9aca58cf1c84",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@variables('Var_Year')",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.Zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Race Results",
+              "dependsOn": [
+                {
+                  "activity": "Set year in bucle",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "4a36a3ba-bfd7-9782-44e1-1f0e627cde62",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@variables('Var_Year')",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.Zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Starting Grid",
+              "dependsOn": [
+                {
+                  "activity": "Set year in bucle",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "e41092dc-9f03-8ced-41a7-3a2b842abb6f",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@variables('Var_Year')",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.Zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Fast Laps",
+              "dependsOn": [
+                {
+                  "activity": "Set year in bucle",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "IfCondition",
+              "typeProperties": {
+                "expression": {
+                  "value": "@greaterOrEquals(variables('Var_Year'),1994)",
+                  "type": "Expression"
+                },
+                "ifTrueActivities": [
+                  {
+                    "type": "TridentNotebook",
+                    "typeProperties": {
+                      "notebookId": "1cf1cacf-b471-a3a7-4780-4fbf42ed4575",
+                      "workspaceId": "00000000-0000-0000-0000-000000000000",
+                      "parameters": {
+                        "Prm_Season_Year": {
+                          "value": {
+                            "value": "@variables('Var_Year')",
+                            "type": "Expression"
+                          },
+                          "type": "int"
+                        },
+                        "target_zone": {
+                          "value": {
+                            "value": "@pipeline().parameters.Zone",
+                            "type": "Expression"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "policy": {
+                      "timeout": "0.12:00:00",
+                      "retry": 0,
+                      "retryIntervalInSeconds": 30,
+                      "secureInput": false,
+                      "secureOutput": false
+                    },
+                    "name": "Pit Stops",
+                    "dependsOn": []
+                  }
+                ],
+                "ifFalseActivities": []
+              },
+              "name": "Year greater than 1993",
+              "dependsOn": [
+                {
+                  "activity": "Race Results",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                },
+                {
+                  "activity": "Starting Grid",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                },
+                {
+                  "activity": "Fast Laps",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SetVariable",
+              "typeProperties": {
+                "variableName": "Var_Year",
+                "value": {
+                  "value": "@item().year",
+                  "type": "Expression"
+                }
+              },
+              "policy": {
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Set year in bucle",
+              "dependsOn": []
+            },
+            {
+              "type": "IfCondition",
+              "typeProperties": {
+                "expression": {
+                  "value": "@greaterOrEquals(variables('Var_Year'),2006)",
+                  "type": "Expression"
+                },
+                "ifTrueActivities": [
+                  {
+                    "type": "TridentNotebook",
+                    "typeProperties": {
+                      "notebookId": "3faf1038-7e3f-be35-4290-50205c683647",
+                      "workspaceId": "00000000-0000-0000-0000-000000000000",
+                      "parameters": {
+                        "Prm_Season_Year": {
+                          "value": {
+                            "value": "@variables('Var_Year')",
+                            "type": "Expression"
+                          },
+                          "type": "int"
+                        },
+                        "target_zone": {
+                          "value": {
+                            "value": "@pipeline().parameters.Zone",
+                            "type": "Expression"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "policy": {
+                      "timeout": "0.12:00:00",
+                      "retry": 0,
+                      "retryIntervalInSeconds": 30,
+                      "secureInput": false,
+                      "secureOutput": false
+                    },
+                    "name": "Qualy",
+                    "dependsOn": []
+                  },
+                  {
+                    "type": "TridentNotebook",
+                    "typeProperties": {
+                      "notebookId": "4b56e406-b11b-ac7d-4eee-363c10ab22b5",
+                      "workspaceId": "00000000-0000-0000-0000-000000000000",
+                      "parameters": {
+                        "Prm_Season_Year": {
+                          "value": {
+                            "value": "@variables('Var_Year')",
+                            "type": "Expression"
+                          },
+                          "type": "int"
+                        },
+                        "target_zone": {
+                          "value": {
+                            "value": "@pipeline().parameters.Zone",
+                            "type": "Expression"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "policy": {
+                      "timeout": "0.12:00:00",
+                      "retry": 0,
+                      "retryIntervalInSeconds": 30,
+                      "secureInput": false,
+                      "secureOutput": false
+                    },
+                    "name": "Practices 1 2 3",
+                    "dependsOn": [
+                      {
+                        "activity": "Qualy",
+                        "dependencyConditions": [
+                          "Succeeded"
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "ifFalseActivities": [
+                  {
+                    "type": "TridentNotebook",
+                    "typeProperties": {
+                      "notebookId": "ee6e2532-5801-a68a-463f-9f303f8247ca",
+                      "workspaceId": "00000000-0000-0000-0000-000000000000",
+                      "parameters": {
+                        "Prm_Season_Year": {
+                          "value": {
+                            "value": "@variables('Var_Year')",
+                            "type": "Expression"
+                          },
+                          "type": "int"
+                        },
+                        "target_zone": {
+                          "value": {
+                            "value": "@pipeline().parameters.Zone",
+                            "type": "Expression"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "policy": {
+                      "timeout": "0.12:00:00",
+                      "retry": 0,
+                      "retryIntervalInSeconds": 30,
+                      "secureInput": false,
+                      "secureOutput": false
+                    },
+                    "name": "Qualy Old",
+                    "dependsOn": []
+                  }
+                ]
+              },
+              "name": "Year greater than 2005",
+              "dependsOn": [
+                {
+                  "activity": "Year greater than 1993",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "IfCondition",
+              "typeProperties": {
+                "expression": {
+                  "value": "@greaterOrEquals(variables('Var_Year'),2021)",
+                  "type": "Expression"
+                },
+                "ifTrueActivities": [
+                  {
+                    "type": "TridentNotebook",
+                    "typeProperties": {
+                      "notebookId": "31d5c5a0-4bf0-93bc-47ba-5dfeb67db7a2",
+                      "workspaceId": "00000000-0000-0000-0000-000000000000",
+                      "parameters": {
+                        "Prm_Season_Year": {
+                          "value": {
+                            "value": "@variables('Var_Year')",
+                            "type": "Expression"
+                          },
+                          "type": "int"
+                        },
+                        "target_zone": {
+                          "value": {
+                            "value": "@pipeline().parameters.Zone",
+                            "type": "Expression"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "policy": {
+                      "timeout": "0.12:00:00",
+                      "retry": 0,
+                      "retryIntervalInSeconds": 30,
+                      "secureInput": false,
+                      "secureOutput": false
+                    },
+                    "name": "Sprints",
+                    "dependsOn": []
+                  }
+                ],
+                "ifFalseActivities": []
+              },
+              "name": "Year greater than 2020",
+              "dependsOn": [
+                {
+                  "activity": "Year greater than 2005",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "079c0302-a6c2-9120-4dd8-46050820d833",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "Prm_Season_Year": {
+                    "value": {
+                      "value": "@variables('Var_Year')",
+                      "type": "Expression"
+                    },
+                    "type": "int"
+                  },
+                  "target_zone": {
+                    "value": {
+                      "value": "@pipeline().parameters.Zone",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Set year processed",
+              "dependsOn": [
+                {
+                  "activity": "Year greater than 2020",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "name": "ForEach1",
+        "dependsOn": [
+          {
+            "activity": "Filter Current Season",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "Zone": {
+        "type": "string"
+      }
+    },
+    "variables": {
+      "Var_Year": {
+        "type": "Integer",
+        "defaultValue": 0
+      }
+    }
+  }
+}
