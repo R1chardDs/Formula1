@@ -37,6 +37,12 @@ from pyspark.sql.types import (
     StructType, StructField, IntegerType, StringType, DateType
 )
 
+TENANT_ID   = ""
+CLIENT_ID   = ""
+CLIENT_SEC  = ""
+HOSTNAME    = "bidatasolutionsni.sharepoint.com"
+SITE_PATH   = "sites/F1"
+
 target_workspace = "F1_Lab"
 target_lakehouse = "Lake_F1_" + target_zone
 target_schema = "dbo"
