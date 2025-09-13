@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Confirm Ingest in Src Silver"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6965380f-8d3e-9a2f-4e0c-c8b8e85e94c6"
+  }
+}

@@ -1,0 +1,3065 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_All_Races_Tracks",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": true,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "All_Races"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "Race_Id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "Season",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Gp",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "date_text",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Date_text",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Web_Url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "sprint",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Sprint",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Scraped_Timestamp",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "logic",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "17"
+                },
+                "sink": {
+                  "name": "Logic",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "TrackKey",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Track_Key",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "bronze",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "Bronze",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "silver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "1"
+                },
+                "sink": {
+                  "name": "Silver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "silver_clean",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "1"
+                },
+                "sink": {
+                  "name": "Silver_Clean",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "All Races",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Races_Results",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Races_Results"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_or_retired",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time_or_retired",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "status",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "status",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_time_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "race_time_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap_to_winner_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "gap_to_winner_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Race Results",
+        "dependsOn": [
+          {
+            "activity": "All Races",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Old_Qualifying",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Old_Qualifying"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "time_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Old Qualy",
+        "dependsOn": [
+          {
+            "activity": "Race Results",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Pit_Stop",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Pit_Stop"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "stop",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "stop",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "lap",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "lap",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_of_day",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time_of_day",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "pit_time",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "pit_time",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "pit_secs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "pit_secs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "total_time",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "total_time",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "total_secs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "total_secs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Pit Stops",
+        "dependsOn": [
+          {
+            "activity": "Old Qualy",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Fast_Laps",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Fast_Laps"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "lap",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "lap",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "lap_time",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "lap_time",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "lap_time_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "lap_time_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gap",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "gap_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "avg_speed_kph",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "avg_speed_kph",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Fast Laps",
+        "dependsOn": [
+          {
+            "activity": "Pit Stops",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Qualifying",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Qualifying"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q1",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q1",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q2",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q2",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q3",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q3",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q1_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q1_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q2_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q2_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q3_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q3_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Qualifying",
+        "dependsOn": [
+          {
+            "activity": "Fast Laps",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Practices",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Practices"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "time_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gap",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "gap_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "interval",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "interval",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "interval_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "interval_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "practice_no",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "practice_no",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Practices 1 2 3",
+        "dependsOn": [
+          {
+            "activity": "Qualifying",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Sprint_Race_Results",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Sprint_Race_Results"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_or_retired",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time_or_retired",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "status",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "status",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_time_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "race_time_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "gap_to_winner_s",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "gap_to_winner_s",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Sprint Results",
+        "dependsOn": [
+          {
+            "activity": "Practices 1 2 3",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Sprint_Qualifying",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Sprint_Qualifying"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q1",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q1",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q2",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q2",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "q3",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "q3",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "laps",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "laps",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q1_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q1_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q2_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q2_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "Q3_Segs",
+                  "type": "Double",
+                  "physicalType": "float"
+                },
+                "sink": {
+                  "name": "Q3_Segs",
+                  "physicalType": "double"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Sprint Qualy",
+        "dependsOn": [
+          {
+            "activity": "Sprint Results",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Sprint_Starting_Grid",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Sprint_Starting_Grid"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "grid_position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "grid_position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_or_note",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time_or_note",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Sprint Grid",
+        "dependsOn": [
+          {
+            "activity": "Sprint Qualy",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00",
+            "datasetSettings": {
+              "type": "AzureSqlTable",
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "v_Starting_Grid",
+                "database": "Lake_F1_Bronze"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "e62d0e69-c12d-4ab3-8666-f8ea048e6513"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "applyVOrder": false,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
+                "table": "Starting_Grid"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Lake_F1_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "grid_position",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "grid_position",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "car_number",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "car_number",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "team",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "team",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "time_or_note",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "time_or_note",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "points",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "points",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_name",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "driver_code",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "driver_code",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "source_url",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "source_url",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "event_title",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "event_title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "scraped_at_utc",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "scraped_at_utc",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "race_id",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "race_id",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "gp_slug",
+                  "type": "String",
+                  "physicalType": "nvarchar",
+                  "length": "MAX"
+                },
+                "sink": {
+                  "name": "gp_slug",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "season",
+                  "type": "Int32",
+                  "physicalType": "int"
+                },
+                "sink": {
+                  "name": "season",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Starting Grid",
+        "dependsOn": [
+          {
+            "activity": "Sprint Grid",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "6965380f-8d3e-9a2f-4e0c-c8b8e85e94c6",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set silver Processed",
+        "dependsOn": [
+          {
+            "activity": "Starting Grid",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "variables": {
+      "Schema_BronzeData": {
+        "type": "String",
+        "defaultValue": "src"
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Nbook - Silver - Move data to Silver"
+    "type": "DataPipeline",
+    "displayName": "Pipe - Silver - Ingest in Silver Src"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "dd1e9c5a-64fd-9e72-444a-6a0304599a67"
+    "logicalId": "849bbdbf-8bcb-9851-4491-1e32f5774dc0"
   }
 }
