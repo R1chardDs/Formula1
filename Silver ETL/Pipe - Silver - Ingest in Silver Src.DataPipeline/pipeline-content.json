@@ -340,12 +340,12 @@
               {
                 "source": {
                   "name": "points",
-                  "type": "Int32",
-                  "physicalType": "int"
+                  "type": "Double",
+                  "physicalType": "float"
                 },
                 "sink": {
                   "name": "points",
-                  "physicalType": "integer"
+                  "physicalType": "double"
                 }
               },
               {

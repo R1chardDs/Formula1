@@ -11,8 +11,8 @@
 
 # PARAMETERS CELL ********************
 
-Prm_Season_Year = 2000
-target_zone = "Test"
+Prm_Season_Year = 2021
+target_zone = "Bronze"
 
 # METADATA ********************
 
@@ -36,7 +36,7 @@ SCHEMA_RESULTS = StructType([
     StructField("team", StringType(), True),
     StructField("laps", IntegerType(), True),
     StructField("time_or_retired", StringType(), True),
-    StructField("points", IntegerType(), True),
+    StructField("points", DoubleType(), True),
     StructField("driver_name", StringType(), True),
     StructField("driver_code", StringType(), True),
     StructField("status", StringType(), True),
@@ -113,6 +113,7 @@ def to_spark(pdf: pd.DataFrame, schema: StructType):
     # crea DF con schema explícito (Arrow no se queja)
     return spark.createDataFrame(pdf2, schema=schema)
 
+#display(spark_races)
 
 # METADATA ********************
 
@@ -240,7 +241,7 @@ spark_results = to_spark(results_pdf, SCHEMA_RESULTS)
 
 spark_results.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
 
-
+#display(spark_results)
 
 # METADATA ********************
 

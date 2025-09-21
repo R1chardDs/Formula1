@@ -374,3 +374,56 @@ df_src_.write.format("delta").mode("overwrite").option("overwriteSchema","true")
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+Prm_Season_Year = 2025
+target_zone = "Bronze"
+
+from delta.tables import DeltaTable
+import pyspark.sql.functions as F
+
+target_table = "Races_Results"
+target_lakehouse = "Lake_F1_" + target_zone
+target_workspace = "F1_Lab"
+target_schema = "dbo"
+tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table
+
+dt = DeltaTable.forPath(spark, tgt_path)
+
+dt.delete( (F.col("race_id") == 1074) )
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+race_id = 1074
+target_zone = "Bronze"
+
+from delta.tables import DeltaTable
+from pyspark.sql.functions import col, lit
+
+target_table = "All_Races"
+target_lakehouse = "Lake_F1_" + target_zone
+target_workspace = "F1_Lab"
+target_schema = "dbo"
+tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table
+
+dt = DeltaTable.forPath(spark, tgt_path)
+
+dt.update(
+    #condition = col("race_id") == lit(race_id),
+    set       = {"silver": lit("N")}
+)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }

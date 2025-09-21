@@ -44,3 +44,25 @@ dt.update(
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+target_table = "All_Races"
+target_lakehouse = "Lake_F1_Silver"
+target_workspace = "F1_Lab"
+target_schema = "src"
+tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table
+
+dt = DeltaTable.forPath(spark, tgt_path)
+
+dt.update(
+    set       = {"silver": lit("Y")}
+)
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
