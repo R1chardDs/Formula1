@@ -47,9 +47,8 @@ SCHEMA_RESULTS = StructType([
     StructField("scraped_at_utc", StringType(), True),
     StructField("race_id", IntegerType(), True),
     StructField("season", IntegerType(), True),
-    StructField("gp_slug", StringType(), True),
+    StructField("gp_slug", StringType(), True)
 ])
-
 
 target_lakehouse = "Lake_F1_" + target_zone
 target_workspace = "F1_Lab"
