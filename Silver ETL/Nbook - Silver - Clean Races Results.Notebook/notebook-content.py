@@ -160,7 +160,7 @@ df_final = df_out.select(*target_cols)
 #print([(f.name, f.dataType.simpleString()) for f in TableSchema])
 #display(df_final)
 
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+#df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
 
 # METADATA ********************
 
@@ -174,17 +174,19 @@ df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.
 df_Races_Notes = (
     df_With_Notes
         .filter(F.col("driver") != "* Provisional results." )
-        .withColumn("note", F.regexp_replace("driver_name", r"\*", ""))
+        .withColumn("Note", F.trim(F.regexp_replace("driver_name", r"\*", "")))
+        .withColumn("Event", F.lit("Race"))
         .select( 
-            F.col("note").alias("Note"), 
+            F.col("Note"), 
             F.col("race_id").alias("Race_Id"),
             F.col("season").alias("Season"),
             F.col("gp_slug").alias("Gp_Slug"),
+            F.col("Event")
         )
     )
 
 #display(df_Races_Notes)
-df_Races_Notes.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Notes")
+#df_Races_Notes.write.format("delta").mode("append").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Races_Notes")
 
 # METADATA ********************
 
