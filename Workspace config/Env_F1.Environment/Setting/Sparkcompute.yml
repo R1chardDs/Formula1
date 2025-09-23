@@ -1,4 +1,4 @@
-enable_native_execution_engine: false
+enable_native_execution_engine: true
 driver_cores: 8
 driver_memory: 56g
 executor_cores: 8

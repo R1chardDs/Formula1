@@ -105,8 +105,8 @@ df_CleanStatusPos = (
 
         .withColumn(
             "Clean_Time_or_Retired", 
-                F.when( (F.col("time_or_retired") == "OK") & (F.col("clean_status") != "Finished"), F.col("clean_status") )
-                .when( (F.col("time_or_retired") == "OK") & (F.col("clean_status") == "Finished"), F.col("gap_to_winner_s") )
+                F.when( (F.col("time_or_retired") == "OK") & (F.col("Clean_Status") != "Finished"), F.col("Clean_Status") )
+                .when( (F.col("time_or_retired") == "OK") & (F.col("Clean_Status") == "Finished"), F.col("gap_to_winner_s") )
                 .otherwise(F.col("time_or_retired"))
             )
         
@@ -128,18 +128,6 @@ df_CleanStatusPos = (
                 .otherwise(F.col("points"))
         )
 )
-
-
-display(df_CleanStatusPos.filter(F.col("Fix_Points") == "Y" ))
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
 
 mappings = [
     ("Clean_Position",        "Position"),
@@ -164,7 +152,39 @@ mappings = [
 
 df_out = df_CleanStatusPos.select([F.col(src).alias(dst) for src, dst in mappings])
 
-display(df_out)
+target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in TableSchema.fields ]
+df_final = df_out.select(*target_cols)
+
+
+#print([(f.name, f.dataType.simpleString()) for f in df_final.schema])
+#print([(f.name, f.dataType.simpleString()) for f in TableSchema])
+#display(df_final)
+
+df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+df_Races_Notes = (
+    df_With_Notes
+        .filter(F.col("driver") != "* Provisional results." )
+        .withColumn("note", F.regexp_replace("driver_name", r"\*", ""))
+        .select( 
+            F.col("note").alias("Note"), 
+            F.col("race_id").alias("Race_Id"),
+            F.col("season").alias("Season"),
+            F.col("gp_slug").alias("Gp_Slug"),
+        )
+    )
+
+#display(df_Races_Notes)
+df_Races_Notes.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Notes")
 
 # METADATA ********************
 
