@@ -113,7 +113,7 @@ df_CleanStatusPos = (
         .drop("driver")
 
         .withColumn(
-            "Clean_Driver_Name", F.regexp_replace(F.col("driver_name"), " ", "")
+            "Clean_Driver_Name", F.trim(F.regexp_replace(F.col("driver_name"), " ", " ") )
         )
 
         .withColumn(
@@ -160,7 +160,7 @@ df_final = df_out.select(*target_cols)
 #print([(f.name, f.dataType.simpleString()) for f in TableSchema])
 #display(df_final)
 
-#df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
 
 # METADATA ********************
 
