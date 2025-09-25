@@ -40,6 +40,8 @@ SCHEMA_PRACTICE = StructType([
     StructField("time_s", DoubleType(), True),       # mejor vuelta en segundos
     StructField("gap", StringType(), True),          # gap vs líder (texto)
     StructField("gap_s", DoubleType(), True),        # gap en segundos
+    StructField("interval", StringType(), True),     # intervalo con el anterior (texto) si existe
+    StructField("interval_s", DoubleType(), True),   # intervalo en segundos
     StructField("laps", IntegerType(), True),
     StructField("driver_name", StringType(), True),
     StructField("driver_code", StringType(), True),
