@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Silver - Ingest Dims in Silver Src"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "505c2ca0-6d0f-afbd-43db-1ac7c89e8f54"
+  }
+}
