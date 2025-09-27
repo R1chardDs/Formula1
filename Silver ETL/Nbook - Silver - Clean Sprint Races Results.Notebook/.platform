@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Clean Sprint Races Results"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b15b5433-e4ae-9895-49c3-32408ac09bbe"
+  }
+}
