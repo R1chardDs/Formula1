@@ -37,15 +37,23 @@ month_map = {
 }
 map_expr = F.create_map([F.lit(k) for kv in month_map.items() for k in kv])
 
-# 2) Extraer últimos 3 chars (RIGHT) y normalizar a mayúsculas
 df_out = (
     df_src
+    # Últimos 3 chars -> abreviatura de mes
     .withColumn("Month", F.upper(F.expr("right(trim(Date_text), 3)")))
-    .withColumn("Id_Month", map_expr[F.col("Month")])
+    .withColumn("Id_Month", map_expr[F.col("Month")].cast("int"))
+
+    # Primeros chars antes del espacio -> día (1–2 dígitos)
+    .withColumn("Id_Day", F.regexp_extract(F.trim(F.col("Date_text")), r'^(\d{1,2})', 1).cast("int"))
+
+    # Fecha completa (Season = año)
+    .withColumn("Date", F.make_date(F.col("Season").cast("int"),
+                                    F.col("Id_Month"),
+                                    F.col("Id_Day")))
 )
 
 #display(df_out)
-df_out.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
+df_out.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
 
 # METADATA ********************
 

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Clean Pit Stop"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "debd8303-bacc-b622-47bc-c338f734c91b"
+  }
+}
