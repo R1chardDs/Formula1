@@ -20,92 +20,70 @@
 # META   }
 # META }
 
-# MARKDOWN ********************
-
-# ###### _**Clean Qualy Results**_
-# 
-# - Remove in df_src all rows not related to the races results ( If laps is null so it's not race result )
-# - Drop Driver Column
-# - Add Column [Clean_Position] Replace the Null Positions With NC
-# - Clean Unicodes in driver name
-# - Replace Null with zero in Q1,Q2,Q3 segs
-
 # CELL ********************
 
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
-
 df_src = spark.sql(
-    "SELECT R.* FROM Lake_F1_Silver.src.Qualifying R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
+    "SELECT R.* FROM Lake_F1_Silver.src.Old_Qualifying R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
 )
 
-
-SCHEMA_QUALI = StructType([
-    StructField("Position", StringType(), True),
-    StructField("Car_number", IntegerType(), True),
+SCHEMA_OLD_QUALI = StructType([
+    StructField("Position", IntegerType(), True),
+    StructField("Car_Number", IntegerType(), True),
     StructField("Team", StringType(), True),
-    StructField("Q1", StringType(), True),
-    StructField("Q2", StringType(), True),
-    StructField("Q3", StringType(), True),
-    StructField("Laps", IntegerType(), True),
-    StructField("Q1_Segs", DoubleType(), True),
-    StructField("Q2_Segs", DoubleType(), True),
-    StructField("Q3_Segs", DoubleType(), True),
+    StructField("Time", StringType(), True),     # tiempo en texto (p.ej. 1:21.434)
+    StructField("Time_Segs", DoubleType(), True),   # tiempo en segundos
+    StructField("Laps", IntegerType(), True),    # opcional (a veces no existe)
+    StructField("Points", IntegerType(), True),  # por si aparece en algunas temporadas
     StructField("Driver_Name", StringType(), True),
     StructField("Driver_Code", StringType(), True),
     StructField("Source_Url", StringType(), True),
     StructField("Event_Title", StringType(), True),
     StructField("Scraped_Timestamp", StringType(), True),
-    StructField("Race_Id", IntegerType(), True),
+    StructField("Race_Dd", IntegerType(), True),
     StructField("Gp_Slug", StringType(), True),
     StructField("Season", IntegerType(), True),
 ])
 
-df_With_Notes = df_src.filter(F.col("laps").isNull())
-df_WithOut_Notes = df_src.filter(F.col("laps").isNotNull())
+df_With_Notes = df_src.filter(F.col("car_number").isNull() )
+df_Without_Notes = df_src.filter(F.col("car_number").isNotNull() )
 
 df_clean = (
     
     df_WithOut_Notes
         .withColumn("Clean_Position", F.when( F.col("position").isNull(), "NC" ).otherwise(F.col("position")))
         .withColumn("Clean_Driver_Name", F.trim(F.regexp_replace(F.col("driver_name"), " ", " ") ))
+        .withColumn("Clean_Laps", F.when( F.col("laps").isNull(),0 ).otherwise(F.col("laps")) )
         .drop("driver")
-        .withColumns({
-            "Q1_Segs_Clean": F.when( F.col("Q1_Segs").isNull(), 0.00 ).otherwise(F.round("Q1_Segs",3)),
-            "Q2_Segs_Clean": F.when( F.col("Q2_Segs").isNull(), 0.00 ).otherwise(F.round("Q2_Segs",3)),
-            "Q3_Segs_Clean": F.when( F.col("Q3_Segs").isNull(), 0.00 ).otherwise(F.round("Q3_Segs",3)),
-            })
 )
 
 mappings = [
 ("Clean_Position","Position"),
-("car_number","Car_number"),
+("car_number","Car_Number"),
 ("team","Team"),
-("q1","Q1"),
-("q2","Q2"),
-("q3","Q3"),
-("laps","Laps"),
-("Q1_Segs_Clean","Q1_Segs"),
-("Q2_Segs_Clean","Q2_Segs"),
-("Q3_Segs_Clean","Q3_Segs"),
+("time","Time"),
+("time_s","Time_Segs"),
+("Clean_Laps","Laps"),
+("points","Points"),
 ("Clean_Driver_Name","Driver_Name"),
 ("driver_code","Driver_Code"),
 ("source_url","Source_Url"),
 ("event_title","Event_Title"),
 ("scraped_at_utc","Scraped_Timestamp"),
-("race_id","Race_Id"),
+("race_id","Race_Dd"),
 ("gp_slug","Gp_Slug"),
 ("season","Season")
 ]
 
 df_out = df_clean.select([F.col(src).alias(dst) for src, dst in mappings])
 
-target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in SCHEMA_QUALI.fields ]
+target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in SCHEMA_OLD_QUALI.fields ]
 df_final = df_out.select(*target_cols)
 
 #display(df_final)
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Qualifying")
+df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Old_Qualifying")
 
 # METADATA ********************
 
@@ -119,9 +97,10 @@ df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.
 df_Races_Notes = (
     df_With_Notes
         .filter(F.col("driver") != "* Provisional results." )
+        .filter( ~ F.col("driver").contains("Error") )
         .withColumn("Note", F.trim(F.regexp_replace("driver_name", r"\*", "")))
-        .withColumn("Event", F.lit("Qualifying"))
-        .select( 
+        .withColumn("Event", F.lit("Old Qualifying"))
+        .select(
             F.col("Note"), 
             F.col("race_id").alias("Race_Id"),
             F.col("season").alias("Season"),
