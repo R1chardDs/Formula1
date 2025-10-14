@@ -42,7 +42,7 @@ SCHEMA_OLD_QUALI = StructType([
     StructField("Source_Url", StringType(), True),
     StructField("Event_Title", StringType(), True),
     StructField("Scraped_Timestamp", StringType(), True),
-    StructField("Race_Dd", IntegerType(), True),
+    StructField("Race_Id", IntegerType(), True),
     StructField("Gp_Slug", StringType(), True),
     StructField("Season", IntegerType(), True),
 ])
@@ -52,7 +52,7 @@ df_Without_Notes = df_src.filter(F.col("car_number").isNotNull() )
 
 df_clean = (
     
-    df_WithOut_Notes
+    df_Without_Notes
         .withColumn("Clean_Position", F.when( F.col("position").isNull(), "NC" ).otherwise(F.col("position")))
         .withColumn("Clean_Driver_Name", F.trim(F.regexp_replace(F.col("driver_name"), " ", " ") ))
         .withColumn("Clean_Laps", F.when( F.col("laps").isNull(),0 ).otherwise(F.col("laps")) )
@@ -72,7 +72,7 @@ mappings = [
 ("source_url","Source_Url"),
 ("event_title","Event_Title"),
 ("scraped_at_utc","Scraped_Timestamp"),
-("race_id","Race_Dd"),
+("race_id","Race_Id"),
 ("gp_slug","Gp_Slug"),
 ("season","Season")
 ]

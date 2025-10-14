@@ -1,0 +1,178 @@
+table Dim_Races
+	lineageTag: 512d482d-38b5-4b40-8d5e-44174409fc31
+	sourceLineageTag: [clean].[Dim_Races]
+
+	column Silver
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d191fc07-abf1-442c-80b4-c6ba68ad08bc
+		sourceLineageTag: Silver
+		summarizeBy: none
+		sourceColumn: Silver
+
+		annotation SummarizationSetBy = Automatic
+
+	column Silver_Clean
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 57f1f2f4-e55e-41aa-8d62-26fb35ec3105
+		sourceLineageTag: Silver_Clean
+		summarizeBy: none
+		sourceColumn: Silver_Clean
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c55e7b2b-413a-4ad4-b79a-231f677ae1c2
+		sourceLineageTag: Month
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id_Month
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1f4f9118-eb0c-4423-834b-64d5050a096a
+		sourceLineageTag: Id_Month
+		summarizeBy: sum
+		sourceColumn: Id_Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id_Day
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b921e3b3-3c43-440f-80f8-38cf1aa49f53
+		sourceLineageTag: Id_Day
+		summarizeBy: sum
+		sourceColumn: Id_Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 93dd199f-4f09-41d4-8979-bc95677b24eb
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Web_Url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 39a12364-ae87-465f-b63c-5504ff34fe98
+		sourceLineageTag: Web_Url
+		summarizeBy: none
+		sourceColumn: Web_Url
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sprint
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 959e397d-b120-4cdb-ace6-73cde8065053
+		sourceLineageTag: Sprint
+		summarizeBy: none
+		sourceColumn: Sprint
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scraped_Timestamp
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c1578429-e90f-46d7-bce0-cfb35f703287
+		sourceLineageTag: Scraped_Timestamp
+		summarizeBy: none
+		sourceColumn: Scraped_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Logic
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e6c08f62-66a0-473d-8c90-43c0b5e36c43
+		sourceLineageTag: Logic
+		summarizeBy: none
+		sourceColumn: Logic
+
+		annotation SummarizationSetBy = Automatic
+
+	column Track_Key
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6ff57eb6-c5d3-4385-8966-8af6b3336283
+		sourceLineageTag: Track_Key
+		summarizeBy: none
+		sourceColumn: Track_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bronze
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e6138586-c24a-483f-9988-82050f673ade
+		sourceLineageTag: Bronze
+		summarizeBy: none
+		sourceColumn: Bronze
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9f164cb4-4682-4015-9cc8-54b0975ba96f
+		sourceLineageTag: Race_Id
+		summarizeBy: none
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7c5e9e6f-f537-4867-b988-ac7712738f5a
+		sourceLineageTag: Season
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gp
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8d3e4b1f-a8f1-4484-85a2-a2517fa32563
+		sourceLineageTag: Gp
+		summarizeBy: none
+		sourceColumn: Gp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date_text
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 457418e5-395a-4bff-94cd-ae3850b0a500
+		sourceLineageTag: Date_text
+		summarizeBy: none
+		sourceColumn: Date_text
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Races = entity
+		mode: directLake
+		source
+			entityName: Dim_Races
+			schemaName: clean
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

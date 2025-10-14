@@ -1,0 +1,204 @@
+table Races_Results
+	lineageTag: 73878fed-d47d-4fd3-a3cf-b9b4547562d7
+	sourceLineageTag: [clean].[Races_Results]
+
+	column Position
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 45f13cbb-f030-41a6-bd9a-86bf2b6c6336
+		sourceLineageTag: Position
+		summarizeBy: sum
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	column Car_Number
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1437b09b-dd8c-4a90-b2a5-6198c7b95a4a
+		sourceLineageTag: Car_Number
+		summarizeBy: sum
+		sourceColumn: Car_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 84e843db-b55a-40c6-83a5-4f7cf1f89c1d
+		sourceLineageTag: Team
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column Laps
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4fb89419-e0a2-46f9-b36b-d395d0023f01
+		sourceLineageTag: Laps
+		summarizeBy: sum
+		sourceColumn: Laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time_Or_Retired
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1f5d30d0-34aa-4dad-95fd-f61437539208
+		sourceLineageTag: Time_Or_Retired
+		summarizeBy: none
+		sourceColumn: Time_Or_Retired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Points
+		dataType: double
+		sourceProviderType: float
+		lineageTag: bf983536-396b-4497-ad7f-b49fb1786811
+		sourceLineageTag: Points
+		summarizeBy: sum
+		sourceColumn: Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Event_Title
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c274511c-1f19-43e4-9d62-8615351c1b90
+		sourceLineageTag: Event_Title
+		summarizeBy: none
+		sourceColumn: Event_Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scraped_Timestamp
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 500ec23a-a6f3-4128-af2b-fa122ba0e0c0
+		sourceLineageTag: Scraped_Timestamp
+		summarizeBy: none
+		sourceColumn: Scraped_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1ccb1747-e2ef-4053-99f5-20df0300a1eb
+		sourceLineageTag: Race_Id
+		summarizeBy: none
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 98d2df4f-3277-4c97-81c4-99d6428dec8f
+		sourceLineageTag: Season
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gp_Slug
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a6568481-00de-4ea5-8831-d10b24f1ebc3
+		sourceLineageTag: Gp_Slug
+		summarizeBy: none
+		sourceColumn: Gp_Slug
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fix_Points
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ec21f0c7-2a9d-4dfd-9e06-72a394ade655
+		sourceLineageTag: Fix_Points
+		summarizeBy: none
+		sourceColumn: Fix_Points
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver_Name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f8d72264-44d2-4c84-a7e9-0e4fe685acdc
+		sourceLineageTag: Driver_Name
+		summarizeBy: none
+		sourceColumn: Driver_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver_Code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 09fc313f-521f-4711-93ea-d576688e7f4e
+		sourceLineageTag: Driver_Code
+		summarizeBy: none
+		sourceColumn: Driver_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 16714739-bdae-4d07-abe0-e48eaa514196
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Time_S
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2f8b7975-cb1d-4946-b230-0d045b4bf6bf
+		sourceLineageTag: Race_Time_S
+		summarizeBy: sum
+		sourceColumn: Race_Time_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gap_To_Winner_S
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 2c0a89d1-db6a-48be-9f8a-88fc4e58f70d
+		sourceLineageTag: Gap_To_Winner_S
+		summarizeBy: sum
+		sourceColumn: Gap_To_Winner_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Source_Url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f4073fe4-93c1-4326-b878-21099d5e20a4
+		sourceLineageTag: Source_Url
+		summarizeBy: none
+		sourceColumn: Source_Url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Races_Results = entity
+		mode: directLake
+		source
+			entityName: Races_Results
+			schemaName: clean
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

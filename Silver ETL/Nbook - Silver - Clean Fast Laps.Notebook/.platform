@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Clean Fast Laps"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c853b8be-a3df-ab47-4e59-55b4759626eb"
+  }
+}
