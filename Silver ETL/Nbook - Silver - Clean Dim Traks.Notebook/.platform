@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Clean Dim Traks"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ab27d2d8-184a-8948-4e6d-90d3171816bf"
+  }
+}
