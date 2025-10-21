@@ -1,0 +1,92 @@
+table v_Total_Points_SeasonDrivers
+	lineageTag: 5662f975-d555-4056-91e4-405ab0ade7e2
+	sourceLineageTag: [dbo].[v_Total_Points_SeasonDrivers]
+
+	column Season
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0307f16f-837d-4003-9a0c-490605767498
+		sourceLineageTag: Season
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver_Name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2fb90fc0-556b-4853-809e-09a5c56267dc
+		sourceLineageTag: Driver_Name
+		summarizeBy: none
+		sourceColumn: Driver_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Points
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 79be6f81-24ce-4bb5-8b0b-bdccb7a4f393
+		sourceLineageTag: Race_Points
+		summarizeBy: sum
+		sourceColumn: Race_Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sprint_Points
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 004392ba-b971-49bc-8ea6-9cff4cfa3c21
+		sourceLineageTag: Sprint_Points
+		summarizeBy: sum
+		sourceColumn: Sprint_Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_Points
+		dataType: double
+		sourceProviderType: float
+		lineageTag: f07bbdaf-d64f-4709-ae04-ebd05040dfda
+		sourceLineageTag: Total_Points
+		summarizeBy: sum
+		sourceColumn: Total_Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Position
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 86671280-ca58-44d2-9a62-92245c5e5410
+		sourceLineageTag: Position
+		summarizeBy: sum
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	column Races
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 35becb83-ad21-4be8-bc59-bd853a9f371a
+		sourceLineageTag: Races
+		summarizeBy: sum
+		sourceColumn: Races
+
+		annotation SummarizationSetBy = Automatic
+
+	partition v_Total_Points_SeasonDrivers = entity
+		mode: directLake
+		source
+			entityName: v_Total_Points_SeasonDrivers
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

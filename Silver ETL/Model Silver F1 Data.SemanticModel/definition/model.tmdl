@@ -25,4 +25,14 @@ ref table Starting_Grid
 ref table Practices
 ref table Sprint_Starting_Grid
 ref table Old_Qualifying
+ref table v_Validation_Summary
+ref table v_Total_Points_SeasonDrivers
+ref table v_Total_Points_RaceDrivers
+ref table v_Validation_NewDrivers
+ref table v_Validation_NewTraks
+ref table v_Validation_AllTablesSummary
+ref table v_Validation_AllTablesDetail
+ref table Dim_Tracks
+ref table Dim_Drivers
+ref table Master_Calendar
 

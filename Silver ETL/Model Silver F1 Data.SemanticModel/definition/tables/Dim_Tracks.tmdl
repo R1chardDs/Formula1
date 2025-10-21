@@ -1,0 +1,54 @@
+table Dim_Tracks
+	lineageTag: 40ed561d-a070-409f-ad1d-3cb059569ff3
+	sourceLineageTag: [clean].[Dim_Tracks]
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 387231a5-326e-4c0d-8362-5649d147d46f
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearBuilt
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 58924e76-5939-4879-afe4-12ec591047af
+		sourceLineageTag: YearBuilt
+		summarizeBy: sum
+		sourceColumn: YearBuilt
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrackKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f6fdc93a-d7ce-4c9b-b12e-b09d4f5951bf
+		sourceLineageTag: TrackKey
+		summarizeBy: none
+		sourceColumn: TrackKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrackName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e3f74ba2-b870-4f48-a5f1-c68c52a50409
+		sourceLineageTag: TrackName
+		summarizeBy: none
+		sourceColumn: TrackName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Tracks = entity
+		mode: directLake
+		source
+			entityName: Dim_Tracks
+			schemaName: clean
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

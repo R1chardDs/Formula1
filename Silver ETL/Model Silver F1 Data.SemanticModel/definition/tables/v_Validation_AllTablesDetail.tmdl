@@ -1,0 +1,100 @@
+table v_Validation_AllTablesDetail
+	lineageTag: 587f9e45-f6a9-4342-8688-218ea5fe657b
+	sourceLineageTag: [dbo].[v_Validation_AllTablesDetail]
+
+	column Teams
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bb1939ce-7d64-4426-8852-fc3830d264d8
+		sourceLineageTag: Teams
+		summarizeBy: sum
+		sourceColumn: Teams
+
+		annotation SummarizationSetBy = Automatic
+
+	column Races
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6d333417-1328-4260-b297-bda205a2623b
+		sourceLineageTag: Races
+		summarizeBy: sum
+		sourceColumn: Races
+
+		annotation SummarizationSetBy = Automatic
+
+	column TableName
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: b6e82427-1bc5-4c97-8154-c1122063245e
+		sourceLineageTag: TableName
+		summarizeBy: none
+		sourceColumn: TableName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 769671e6-eac1-4814-85bb-5fb825999b68
+		sourceLineageTag: Season
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f5801859-a254-4f1a-84fc-5e7621c681b4
+		sourceLineageTag: Race_Id
+		summarizeBy: count
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Drivers
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0bda3914-6799-4eb0-83cd-ac2f08637c66
+		sourceLineageTag: Drivers
+		summarizeBy: sum
+		sourceColumn: Drivers
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalRows
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d45e287c-e5ad-4b28-8304-8829d2f86a7d
+		sourceLineageTag: TotalRows
+		summarizeBy: sum
+		sourceColumn: TotalRows
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last_Race_Id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1a6cdc9b-0f9c-42bb-805b-c25650ee8b8a
+		sourceLineageTag: Last_Race_Id
+		summarizeBy: count
+		sourceColumn: Last_Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition v_Validation_AllTablesDetail = entity
+		mode: directLake
+		source
+			entityName: v_Validation_AllTablesDetail
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

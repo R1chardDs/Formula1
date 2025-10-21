@@ -100,7 +100,7 @@ mappings = [
     ("base_time_s", "Base_time_s"),
     ("real_time_s", "Real_time_s"),
     ("laps", "Laps"),
-    ("driver_name", "Driver_Name"),
+    ("Clean_Driver_Name", "Driver_Name"),
     ("driver_code", "Driver_Code"),
     ("source_url", "Source_Url"),
     ("event_title", "Event_Title"),
