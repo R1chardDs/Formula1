@@ -50,10 +50,11 @@ df_out = (
     .withColumn("Date", F.make_date(F.col("Season").cast("int"),
                                     F.col("Id_Month"),
                                     F.col("Id_Day")))
+    .withColumn("Gold", F.lit("N") )
 )
 
 #display(df_out)
-df_out.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
+df_out.write.format("delta").mode("append").option("overwriteSchema", "true").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
 
 # METADATA ********************
 

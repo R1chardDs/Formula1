@@ -497,6 +497,35 @@
             ]
           }
         ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {},
+          "waitOnCompletion": false,
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "pipelineId": "849bbdbf-8bcb-9851-4491-1e32f5774dc0",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "35926c5a-2500-448c-9b2f-d6a5884c7352"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke ingest silver src",
+        "dependsOn": [
+          {
+            "activity": "ForEach1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ],
     "parameters": {
