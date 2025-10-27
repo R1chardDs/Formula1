@@ -29,6 +29,7 @@
 #     - If position it's Null and Status = Finished so it's DQ (Disquilified)
 #     - In [Clean_Position] column Replace the other Null Positions With NC
 # - Add Column [Clean_Status] = If [Clean_Position] = DQ then DSQ else [Status]
+#     - Modified the logic of status, before set DSQ evaluate if time_or_retired it's SHC, if it's status = SHC
 # - Drop Driver column
 # - Clean Unicodes In Columns [team, driver_name,driver_code, status, event_title]
 # - In the column time/retired replace the "OK" values with DNF
@@ -39,6 +40,11 @@
 # - Append df_Fix_Points & df_NoFix_Points, drop the New_Points column but keep the Fix_Points column in the end, for identify which columns changed
 # - Save df in new Table in Lake_F1_Silver.clean.Races_Results
 
+
+# MARKDOWN ********************
+
+# **❗If you are running a full re-ingest, please run before: "Nbook - Silver - PreClean Silver Data" 
+# and then run "Nbook - Silver - PostClean Silver Data" these are manual nbooks, run the snippets required/related to the table you are reprocessing**
 
 # CELL ********************
 
@@ -93,14 +99,16 @@ df_CleanStatusPos = (
     
         .withColumn(
             "Clean_Position", 
-                F.when( (F.col("position").isNull()) & (F.col("status") == "Finished" ) , "DQ" )
-                .when( F.col("position").isNull(), "NC" )
-                .otherwise(F.col("position")) 
+                F.when( (F.col("position").isNull()) & (F.col("status") == "Finished" ) & (F.col("time_or_retired") != "SHC" ) , "DQ" )
+                 .when( F.col("position").isNull(), "NC" )
+                 .otherwise(F.col("position")) 
             )
         
         .withColumn(
             "Clean_Status", 
-                F.when( F.col("Clean_Position") == "DQ", "DSQ" ).otherwise(F.col("status"))
+                F.when( F.col("Clean_Position") == "DQ", "DSQ" )
+                 .when( (F.col("time_or_retired") == "SHC" ) & (F.col("laps").isNull() ), "SHC" )
+                 .otherwise(F.col("status"))
             )
 
         .withColumn(
@@ -160,7 +168,7 @@ df_final = df_out.select(*target_cols)
 #print([(f.name, f.dataType.simpleString()) for f in TableSchema])
 #display(df_final)
 
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Races_Results")
 
 # METADATA ********************
 
