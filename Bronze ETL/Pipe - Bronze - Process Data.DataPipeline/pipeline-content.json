@@ -520,6 +520,21 @@
         "name": "Invoke ingest silver src",
         "dependsOn": [
           {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 15
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
             "activity": "ForEach1",
             "dependencyConditions": [
               "Succeeded"

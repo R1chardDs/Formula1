@@ -22,10 +22,10 @@
 
 # CELL ********************
 
-df_src = spark.sql( "SELECT * FROM Lake_F1_Silver.src.Dim_Tracks" )
+df_src = spark.sql( "SELECT TrackKey AS Track_Key, TrackName AS Track_Name, Country, YearBuilt AS Year_Built FROM Lake_F1_Silver.src.Dim_Tracks" )
 
 #display(df_src)
-df_src.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Dim_Tracks")
+df_src.write.format("delta").option("overwriteschema","true").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Dim_Tracks")
 
 # METADATA ********************
 

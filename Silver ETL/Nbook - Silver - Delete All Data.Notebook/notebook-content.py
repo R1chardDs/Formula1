@@ -88,3 +88,17 @@
 # META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC 
+# MAGIC UPDATE Lake_F1_Silver.src.All_Races
+# MAGIC SET Silver_Clean = 'N'
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }

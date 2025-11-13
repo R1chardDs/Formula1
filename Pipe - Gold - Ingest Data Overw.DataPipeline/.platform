@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Gold - Ingest Data Overw"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "362189bc-c4eb-9efa-47cc-9785f6aa3593"
+  }
+}
