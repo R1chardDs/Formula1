@@ -1,0 +1,171 @@
+table Qualifying
+	lineageTag: de6bbc48-5e7f-42ae-96f5-ab6b67b7a41b
+
+	column Position
+		dataType: string
+		lineageTag: 51d16a30-28f1-44f6-8662-5bc521b1e79d
+		summarizeBy: none
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	column Car_number
+		dataType: int64
+		formatString: 0
+		lineageTag: af557289-db4a-4dc3-857a-0cb599641d2a
+		summarizeBy: sum
+		sourceColumn: Car_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: dd30c781-2e97-4531-9293-6680e8da728c
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q1
+		dataType: string
+		lineageTag: f4115ce4-a66f-4262-b58c-d3e0f9fd6eef
+		summarizeBy: none
+		sourceColumn: Q1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q2
+		dataType: string
+		lineageTag: 36c6ac88-2c86-43bc-9caa-1bb2f4d45302
+		summarizeBy: none
+		sourceColumn: Q2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q3
+		dataType: string
+		lineageTag: e2534772-dd00-4f29-b443-36513d484028
+		summarizeBy: none
+		sourceColumn: Q3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Laps
+		dataType: int64
+		formatString: 0
+		lineageTag: df3aa324-61e8-45fc-a6ef-aa169dfe3a18
+		summarizeBy: sum
+		sourceColumn: Laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q1_Segs
+		dataType: double
+		lineageTag: 6547492e-4590-49c5-9ed7-4e463798800d
+		summarizeBy: sum
+		sourceColumn: Q1_Segs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Q2_Segs
+		dataType: double
+		lineageTag: 248d0fd9-5e37-4e9c-8f6b-b4a4a95ee5f0
+		summarizeBy: sum
+		sourceColumn: Q2_Segs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Q3_Segs
+		dataType: double
+		lineageTag: 4fe77d67-9e11-424a-9016-452a68a50842
+		summarizeBy: sum
+		sourceColumn: Q3_Segs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Driver_Name
+		dataType: string
+		lineageTag: bc8d661a-bbdf-4457-aa3d-eabf7c5a1b0d
+		summarizeBy: none
+		sourceColumn: Driver_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver_Code
+		dataType: string
+		lineageTag: 40aab8d3-3124-4a30-8f2e-d4d7ac4c6981
+		summarizeBy: none
+		sourceColumn: Driver_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Source_Url
+		dataType: string
+		lineageTag: 849663be-a306-48df-9341-1a27cd9e3ba9
+		summarizeBy: none
+		sourceColumn: Source_Url
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_Title
+		dataType: string
+		lineageTag: 9551a184-3fc9-4aad-9e4c-c5f5b5b21156
+		summarizeBy: none
+		sourceColumn: Event_Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scraped_Timestamp
+		dataType: string
+		lineageTag: 10d0adfd-8532-45ec-b18a-409d136716f4
+		summarizeBy: none
+		sourceColumn: Scraped_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cfef826-e111-4033-b1d5-851ed8112f67
+		summarizeBy: none
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gp_Slug
+		dataType: string
+		lineageTag: 2f136725-9a71-42bf-8b79-5d90c752717a
+		summarizeBy: none
+		sourceColumn: Gp_Slug
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		lineageTag: da091065-44ae-4487-89ac-d7307fe2ff73
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Qualifying = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("43744gk6unre7lkznugqug2kpu-66jf2juva54uxmtsbydcqhcjyu.datawarehouse.fabric.microsoft.com"),
+				    Lake_F1_Bronze = Source{[Name="Lake_F1_Silver"]}[Data],
+				    dbo_Dim_Countrys = Lake_F1_Bronze{[Schema="clean",Item="Qualifying"]}[Data]
+				in
+				    dbo_Dim_Countrys
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

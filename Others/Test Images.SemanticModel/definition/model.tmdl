@@ -1,0 +1,20 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Dim_Country","Dim_Races","_Measures","Race_Results","Qualifying"]
+
+ref table Dim_Country
+ref table Dim_Races
+ref table _Measures
+ref table Race_Results
+ref table Qualifying
+
+ref cultureInfo en-US
+

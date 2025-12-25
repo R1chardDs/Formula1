@@ -47,6 +47,8 @@ tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" 
 df_RacesResults = spark.read.format("delta").load(tgt_path)
 df_PreUpdate = df_RacesResults.filter( (F.col("status") == "Finished")  & (F.col("laps").isNull()) & (F.col("time_or_retired").isNull())  )
 
+display(df_PreUpdate)
+
 dt = DeltaTable.forPath(spark, tgt_path)
 
 update_condition = (

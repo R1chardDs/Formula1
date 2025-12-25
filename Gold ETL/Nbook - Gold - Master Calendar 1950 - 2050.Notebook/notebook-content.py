@@ -125,8 +125,8 @@ df_calendar = df.select(
     "IdPeriod"
 )
 
-#display(df_calendar)
-df_calendar.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Gold.dbo.Master_Calendar")
+display(df_calendar)
+#df_calendar.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Gold.dbo.Master_Calendar")
 
 # METADATA ********************
 

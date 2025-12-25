@@ -1,0 +1,68 @@
+table Dim_Country
+	lineageTag: 0c205617-2352-473b-a908-d49a8c235ffe
+
+	column Country
+		dataType: string
+		lineageTag: e1e7a722-f436-46be-a856-b86364ddc939
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_Abbrev
+		dataType: string
+		lineageTag: 02629846-bf45-436d-9274-14801e388167
+		summarizeBy: none
+		sourceColumn: Country_Abbrev
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b50506bc-82dd-4ac1-9107-30c84352f799
+		summarizeBy: none
+		sourceColumn: Country_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sharepoint_Image_URL
+		dataType: string
+		lineageTag: ad26abdf-a6f8-4e11-82b2-da4b5b2f991e
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Sharepoint_Image_URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: f7d4a627-5ba5-4f8b-bca5-59df0ccf938e
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL_Download
+		dataType: string
+		lineageTag: edf5c089-fcdd-4e21-aa87-ab66b04b178b
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: URL_Download
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Country = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("43744gk6unre7lkznugqug2kpu-66jf2juva54uxmtsbydcqhcjyu.datawarehouse.fabric.microsoft.com"),
+				    Lake_F1_Bronze = Source{[Name="Lake_F1_Silver"]}[Data],
+				    dbo_Dim_Countrys = Lake_F1_Bronze{[Schema="clean",Item="Dim_Country"]}[Data]
+				in
+				    dbo_Dim_Countrys
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

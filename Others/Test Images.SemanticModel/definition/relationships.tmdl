@@ -1,0 +1,12 @@
+relationship AutoDetected_e001e53b-5ce2-475a-9f2d-f274ca0a0e75
+	fromColumn: Dim_Races.Country
+	toColumn: Dim_Country.Country
+
+relationship c0c8d30a-0b5d-890b-2031-f0a897ca03bd
+	fromColumn: Race_Results.Race_Id
+	toColumn: Dim_Races.Race_Id
+
+relationship AutoDetected_bb38a84c-149a-4ae6-ae75-1dc031453099
+	fromColumn: Qualifying.Race_Id
+	toColumn: Dim_Races.Race_Id
+

@@ -1,0 +1,172 @@
+table Race_Results
+	lineageTag: 45716615-a356-43d4-a9b8-df3ff5fb609f
+
+	column Position
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a56cecf-1c66-49c7-8dbc-b6e2b2eebf99
+		summarizeBy: sum
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	column Car_Number
+		dataType: int64
+		formatString: 0
+		lineageTag: 2da65ec8-2b53-462e-8b75-c2f7ac40edab
+		summarizeBy: sum
+		sourceColumn: Car_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: 01bae9ca-a3b5-45db-a351-e165afb1fb4d
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column Laps
+		dataType: int64
+		formatString: 0
+		lineageTag: 308c9890-4d29-40d1-841e-e9c0600dd3c2
+		summarizeBy: sum
+		sourceColumn: Laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time_Or_Retired
+		dataType: string
+		lineageTag: c1c03dad-64b1-4cbe-beb9-05aa7914c153
+		summarizeBy: none
+		sourceColumn: Time_Or_Retired
+
+		annotation SummarizationSetBy = Automatic
+
+	column Points
+		dataType: double
+		lineageTag: 74ae91cc-2426-4b9e-a120-69d3771e798f
+		summarizeBy: sum
+		sourceColumn: Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Driver_Name
+		dataType: string
+		lineageTag: 2afd1dac-7407-4754-9f00-5a0abe6f86bf
+		summarizeBy: none
+		sourceColumn: Driver_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver_Code
+		dataType: string
+		lineageTag: 21842e43-d0ee-41a9-9ec6-af48fbf3bf87
+		summarizeBy: none
+		sourceColumn: Driver_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 1968e743-bc42-4083-852e-90e0cb594e6a
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Time_S
+		dataType: double
+		lineageTag: 78d45de1-8454-456d-9fa2-e00a2fe61b9f
+		summarizeBy: sum
+		sourceColumn: Race_Time_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gap_To_Winner_S
+		dataType: double
+		lineageTag: 18ff1158-6931-4e54-9057-67529c7881bc
+		summarizeBy: sum
+		sourceColumn: Gap_To_Winner_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Source_Url
+		dataType: string
+		lineageTag: 3772891c-1d55-49df-a331-9a1345714d2c
+		summarizeBy: none
+		sourceColumn: Source_Url
+
+		annotation SummarizationSetBy = Automatic
+
+	column Event_Title
+		dataType: string
+		lineageTag: 7728d9a7-993f-455d-ba93-9928b4ec3816
+		summarizeBy: none
+		sourceColumn: Event_Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scraped_Timestamp
+		dataType: string
+		lineageTag: f13cfa73-c32b-4e24-a5ac-b299d9e18b7c
+		summarizeBy: none
+		sourceColumn: Scraped_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		lineageTag: f32d3d5d-1aac-4525-8465-b994cd2ce3b7
+		summarizeBy: none
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		lineageTag: 4637adb1-12d3-4515-810b-f724651bd1d0
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gp_Slug
+		dataType: string
+		lineageTag: a1acddf2-e390-42fb-b44a-f9dbc8d7c229
+		summarizeBy: none
+		sourceColumn: Gp_Slug
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fix_Points
+		dataType: string
+		lineageTag: 01034e90-4a86-46b4-b2f5-180de3dbcfc3
+		summarizeBy: none
+		sourceColumn: Fix_Points
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Race_Results = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("43744gk6unre7lkznugqug2kpu-66jf2juva54uxmtsbydcqhcjyu.datawarehouse.fabric.microsoft.com"),
+				    Lake_F1_Bronze = Source{[Name="Lake_F1_Silver"]}[Data],
+				    dbo_Dim_Countrys = Lake_F1_Bronze{[Schema="clean",Item="Races_Results"]}[Data]
+				in
+				    dbo_Dim_Countrys
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

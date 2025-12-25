@@ -1,0 +1,16 @@
+function UDF_FormatSecs_HHMMSS = ```
+		(
+			MeasureName : expr	
+		) => 
+		Var _Seconds = MeasureName
+		Var _Minutes = INT(DIVIDE(MeasureName, 60))
+		Var _ModSeconds = MOD(_Seconds, 60)
+		Var _Hours = INT(DIVIDE(_Minutes, 60))
+		Var _ModMinutes = MOD(_Minutes, 60)
+		
+		Return
+		
+		FORMAT( _Hours, "00" ) & ":" & FORMAT( _ModMinutes, "00") & ":" & FORMAT( _ModSeconds, "00")
+		```
+	lineageTag: af9b5062-290a-4e03-9e57-204af27de83d
+

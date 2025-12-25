@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Gold - Ingest Dims in Gold"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0a2dbbe3-9d14-871d-4599-360a88358fbf"
+  }
+}

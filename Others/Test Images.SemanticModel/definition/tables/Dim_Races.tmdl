@@ -1,0 +1,86 @@
+table Dim_Races
+	lineageTag: a258c2be-310f-4251-9ccb-77f57390f07b
+
+	column Race_Id
+		dataType: int64
+		formatString: 0
+		lineageTag: e013b595-c591-4b42-9633-91d0c5efc17b
+		summarizeBy: none
+		sourceColumn: Race_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Track_Key
+		dataType: string
+		lineageTag: 00877c42-690c-4574-b0c2-721a1c9797b4
+		summarizeBy: none
+		sourceColumn: Track_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Season
+		dataType: int64
+		formatString: 0
+		lineageTag: 80d98d12-523d-4e08-813d-f9fb4a1f8688
+		summarizeBy: sum
+		sourceColumn: Season
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gp
+		dataType: string
+		lineageTag: ee8970c2-1ad7-4a4e-b997-8a86e7be0897
+		summarizeBy: none
+		sourceColumn: Gp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: ce9067a9-6117-410e-ac62-f7131194eb28
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sprint
+		dataType: string
+		lineageTag: acf1bd3a-4dd0-40a9-a61b-121670ffdac1
+		summarizeBy: none
+		sourceColumn: Sprint
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scraped_Timestamp
+		dataType: string
+		lineageTag: 094f7814-cfd8-4f8f-8f62-681bb51ef8e3
+		summarizeBy: none
+		sourceColumn: Scraped_Timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 20fda871-8d19-4f13-9cfb-0e6a64b647a2
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Dim_Races = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("43744gk6unre7lkznugqug2kpu-66jf2juva54uxmtsbydcqhcjyu.datawarehouse.fabric.microsoft.com"),
+				    Lake_F1_Bronze = Source{[Name="Lake_F1_Silver"]}[Data],
+				    dbo_Dim_Countrys = Lake_F1_Bronze{[Schema="clean",Item="v_Dim_Races"]}[Data]
+				in
+				    dbo_Dim_Countrys
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

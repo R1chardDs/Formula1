@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Clean Dim Country"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "347d13da-361f-8e62-4f72-6e3346d53068"
+  }
+}
