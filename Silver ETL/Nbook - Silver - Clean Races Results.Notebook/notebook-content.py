@@ -56,7 +56,7 @@ df_src = spark.sql(
 )
 
 TableSchema = StructType([
-    StructField("Position", IntegerType(), True),
+    StructField("Position", StringType(), True),
     StructField("Car_Number", IntegerType(), True),
     StructField("Team", StringType(), True),
     StructField("Laps", IntegerType(), True),
@@ -166,9 +166,10 @@ df_final = df_out.select(*target_cols)
 
 #print([(f.name, f.dataType.simpleString()) for f in df_final.schema])
 #print([(f.name, f.dataType.simpleString()) for f in TableSchema])
+
 #display(df_final)
 
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+df_final.write.format("delta").mode("append").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Races_Results")
 
 # METADATA ********************
 
