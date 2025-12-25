@@ -12,7 +12,6 @@
 # PARAMETERS CELL ********************
 
 Prm_Season_Year = 2025
-target_zone = "Test"
 
 # METADATA ********************
 

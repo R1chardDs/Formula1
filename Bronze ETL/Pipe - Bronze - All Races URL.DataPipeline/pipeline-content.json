@@ -14,14 +14,17 @@
               "table": "F1_Years"
             },
             "schema": [],
-            "linkedService": {
-              "name": "Lake_F1_Test",
+            "connectionSettings": {
+              "name": "Lake_F1_Bronze",
               "properties": {
                 "type": "Lakehouse",
                 "typeProperties": {
-                  "artifactId": "e16981b6-cb70-b645-4d1b-bbf6c8e799e8",
+                  "artifactId": "282da182-3980-97c6-4d87-d47ccbf6d77c",
                   "workspaceId": "00000000-0000-0000-0000-000000000000",
                   "rootFolder": "Tables"
+                },
+                "externalReferences": {
+                  "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
                 },
                 "annotations": []
               }
@@ -61,13 +64,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.target_zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -108,13 +104,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.target_zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -187,15 +176,10 @@
       {
         "type": "InvokePipeline",
         "typeProperties": {
-          "parameters": {
-            "Zone": {
-              "value": "@pipeline().parameters.target_zone",
-              "type": "Expression"
-            }
-          },
+          "parameters": {},
           "waitOnCompletion": false,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "2614062b-ad22-8472-4d40-24aa151b61bd",
+          "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
+          "pipelineId": "151b61bd-24aa-4d40-8472-ad222614062b",
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
@@ -209,6 +193,8 @@
           "secureOutput": false
         },
         "name": "Invoke pipeline1",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Wait 10 segs 2",
@@ -218,12 +204,6 @@
           }
         ]
       }
-    ],
-    "parameters": {
-      "target_zone": {
-        "type": "string",
-        "defaultValue": "Bronze"
-      }
-    }
+    ]
   }
 }
