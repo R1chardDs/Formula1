@@ -26,7 +26,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
 df_src = spark.sql(
-    "SELECT A.* FROM Lake_F1_Silver.src.All_Races A WHERE A.Silver_Clean = 'N'" 
+    "SELECT * FROM Lake_F1_Silver.staging.All_Races"
 )
 
 # 1) Mapa de abreviaturas -> número de mes (ENG + ESP)
@@ -54,7 +54,7 @@ df_out = (
 )
 
 #display(df_out)
-df_out.write.format("delta").mode("append").option("overwriteSchema", "true").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
+df_out.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("Lake_F1_Silver.clean.Dim_Races")
 
 # METADATA ********************
 

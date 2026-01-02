@@ -43,7 +43,7 @@ from pyspark.sql.window import Window
 w = Window.partitionBy("race_id", "practice_no")
 
 df_src = spark.sql(
-    "SELECT R.* FROM Lake_F1_Silver.src.Practices R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
+    "SELECT * FROM Lake_F1_Silver.staging.Practices" 
 )
 
 SCHEMA_PRACTICE = StructType([
@@ -118,7 +118,7 @@ target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in SCHEMA_PRA
 df_final = df_out.select(*target_cols)
 
 #display(df_final)
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Practices")
+df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Practices")
 
 # METADATA ********************
 

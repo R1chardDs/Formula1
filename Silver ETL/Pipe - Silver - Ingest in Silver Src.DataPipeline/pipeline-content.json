@@ -24,8 +24,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": true,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -238,8 +239,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -525,8 +527,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -789,8 +792,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -1077,8 +1081,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -1375,8 +1380,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -1674,8 +1680,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -1984,8 +1991,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -2271,8 +2279,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -2570,8 +2579,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -2812,8 +2822,9 @@
           },
           "sink": {
             "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
+            "tableActionOption": "OverwriteSchema",
             "applyVOrder": false,
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -3059,8 +3070,8 @@
         "typeProperties": {
           "parameters": {},
           "waitOnCompletion": false,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "505c2ca0-6d0f-afbd-43db-1ac7c89e8f54",
+          "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
+          "pipelineId": "c89e8f54-1ac7-43db-afbd-6d0f505c2ca0",
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
@@ -3074,6 +3085,8 @@
           "secureOutput": false
         },
         "name": "Invoke Ingest Dims",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Set silver Processed",
@@ -3087,7 +3100,7 @@
     "variables": {
       "Schema_BronzeData": {
         "type": "String",
-        "defaultValue": "src"
+        "defaultValue": "staging"
       }
     }
   }

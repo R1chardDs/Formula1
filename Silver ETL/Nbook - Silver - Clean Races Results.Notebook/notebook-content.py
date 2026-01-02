@@ -52,7 +52,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
 df_src = spark.sql(
-    "SELECT R.* FROM Lake_F1_Silver.src.Races_Results R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
+    "SELECT * FROM Lake_F1_Silver.src.Races_Results" 
 )
 
 TableSchema = StructType([
@@ -169,7 +169,7 @@ df_final = df_out.select(*target_cols)
 
 #display(df_final)
 
-df_final.write.format("delta").mode("append").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Races_Results")
+df_final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Races_Results")
 
 # METADATA ********************
 

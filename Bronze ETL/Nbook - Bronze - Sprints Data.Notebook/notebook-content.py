@@ -12,7 +12,6 @@
 # PARAMETERS CELL ********************
 
 Prm_Season_Year = 2021
-target_zone = "Test"
 
 # METADATA ********************
 
@@ -91,9 +90,9 @@ SCHEMA_QUALI = StructType([
     StructField("season", IntegerType(), True),
 ])
 
-target_lakehouse = "Lake_F1_" + target_zone
+target_lakehouse = "Lake_F1_Bronze"
 target_workspace = "F1_Lab"
-target_schema = "dbo"
+target_schema = "stating"
 
 tgt_path_race = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table_race
 tgt_path_qualy = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table_qualy
@@ -111,7 +110,7 @@ import pandas as pd
 src_table = "All_Races"
 src_workspace = target_workspace
 src_lakehouse = target_lakehouse
-src_shecma = target_schema
+src_shecma = "dbo"
 
 src_path = "abfss://" + src_workspace + "@onelake.dfs.fabric.microsoft.com/" + src_lakehouse + ".Lakehouse/Tables/" + src_shecma + "/" + src_table
 

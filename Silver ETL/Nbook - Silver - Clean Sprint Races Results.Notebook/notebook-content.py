@@ -76,7 +76,7 @@ CalcPoints = (
 )
 
 df_src = spark.sql(
-    "SELECT R.* FROM Lake_F1_Silver.src.Sprint_Race_Results R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
+    "SELECT * FROM Lake_F1_Silver.staging.Sprint_Race_Results" 
 )
 
 df_With_Notes = df_src.filter(F.col("points").isNull())
@@ -152,7 +152,7 @@ target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in TableSchem
 df_final = df_out.select(*target_cols)
 
 #display(df_final)
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Sprint_Races_Results")
+df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Sprint_Races_Results")
 
 # METADATA ********************
 

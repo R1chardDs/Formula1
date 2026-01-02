@@ -292,29 +292,6 @@
             ]
           }
         ]
-      },
-      {
-        "type": "TridentNotebook",
-        "typeProperties": {
-          "notebookId": "94df8aa4-4f43-bb94-42ef-a0c631c74121",
-          "workspaceId": "00000000-0000-0000-0000-000000000000"
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Confirm Ingest in Clean Silver",
-        "dependsOn": [
-          {
-            "activity": "Clean Starting Gring",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
       }
     ]
   }

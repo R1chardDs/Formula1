@@ -402,7 +402,7 @@ dt.delete( (F.col("race_id") == 1074) )
 
 # CELL ********************
 
-race_id = 1074
+race_id = 1275
 target_zone = "Bronze"
 
 from delta.tables import DeltaTable
@@ -417,7 +417,7 @@ tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" 
 dt = DeltaTable.forPath(spark, tgt_path)
 
 dt.update(
-    #condition = col("race_id") == lit(race_id),
+    condition = col("race_id") == lit(race_id),
     set       = {"silver": lit("N")}
 )
 

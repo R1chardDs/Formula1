@@ -42,9 +42,9 @@ SCHEMA_RACES = StructType([
 
 RACE_ID_PAT = r"/races/(\d+)(?:/|$)"
 
-target_lakehouse = "Lake_F1_" + target_zone
+target_lakehouse = "Lake_F1_Bronze"
 target_workspace = "F1_Lab"
-target_schema = "dbo"
+target_schema = "staging"
 tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table
 
 from delta.tables import *

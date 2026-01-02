@@ -30,7 +30,7 @@
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
-                "schema": "src",
+                "schema": "staging",
                 "table": "Dim_Tracks"
               },
               "schema": [],
@@ -98,7 +98,7 @@
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
-                "schema": "src",
+                "schema": "staging",
                 "table": "Dim_Drivers"
               },
               "schema": [],
@@ -164,8 +164,8 @@
         "typeProperties": {
           "parameters": {},
           "waitOnCompletion": false,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "46a78eb7-4924-9d83-434b-7ff4138be3ca",
+          "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
+          "pipelineId": "138be3ca-7ff4-434b-9d83-492446a78eb7",
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
@@ -179,6 +179,8 @@
           "secureOutput": false
         },
         "name": "Invoke Clean Src Data",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Wait 15 secs",
@@ -217,7 +219,7 @@
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
-                "schema": "src",
+                "schema": "staging",
                 "table": "Dim_Country"
               },
               "schema": [],

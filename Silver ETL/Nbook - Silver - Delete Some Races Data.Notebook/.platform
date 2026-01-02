@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Nbook - Silver - Delete Some Races Data"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9c298868-ddb8-bf60-4673-d195debfb84f"
+  }
+}

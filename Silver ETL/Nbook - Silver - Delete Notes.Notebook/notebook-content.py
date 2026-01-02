@@ -22,21 +22,13 @@
 
 # CELL ********************
 
-from pyspark.sql import functions as F
+# MAGIC %%sql
+# MAGIC DELETE FROM clean.Races_Notes
 
-df_src = spark.sql("SELECT * FROM Lake_F1_Silver.sta.Dim_Country")
-
-df_Final = df_src.withColumn(
-    "URL_Download",
-    F.regexp_replace(F.col("Sharepoint_Image_URL"), r"\?.*", "?download=1")
-)
-
-#display(df_Final)
-df_Final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("clean.Dim_Country")
 
 # METADATA ********************
 
 # META {
-# META   "language": "python",
+# META   "language": "sparksql",
 # META   "language_group": "synapse_pyspark"
 # META }

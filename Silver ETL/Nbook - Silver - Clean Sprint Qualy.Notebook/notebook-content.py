@@ -36,7 +36,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
 df_src = spark.sql(
-    "SELECT R.* FROM Lake_F1_Silver.src.Sprint_Qualifying R INNER JOIN Lake_F1_Silver.src.All_Races A ON A.Race_Id = R.race_id AND A.Silver_Clean = 'N'" 
+    "SELECT * FROM Lake_F1_Silver.staging.Sprint_Qualifying" 
 )
 
 
@@ -104,7 +104,7 @@ target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in SCHEMA_QUA
 df_final = df_out.select(*target_cols)
 
 #display(df_final)
-df_final.write.format("delta").mode("append").saveAsTable("Lake_F1_Silver.clean.Sprint_Qualifying")
+df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Sprint_Qualifying")
 
 # METADATA ********************
 

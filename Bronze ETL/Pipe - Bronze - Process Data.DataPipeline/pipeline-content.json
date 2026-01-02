@@ -83,13 +83,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.Zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -122,13 +115,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.Zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -161,13 +147,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.Zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -208,13 +187,6 @@
                             "type": "Expression"
                           },
                           "type": "int"
-                        },
-                        "target_zone": {
-                          "value": {
-                            "value": "@pipeline().parameters.Zone",
-                            "type": "Expression"
-                          },
-                          "type": "string"
                         }
                       }
                     },
@@ -289,13 +261,6 @@
                             "type": "Expression"
                           },
                           "type": "int"
-                        },
-                        "target_zone": {
-                          "value": {
-                            "value": "@pipeline().parameters.Zone",
-                            "type": "Expression"
-                          },
-                          "type": "string"
                         }
                       }
                     },
@@ -321,13 +286,6 @@
                             "type": "Expression"
                           },
                           "type": "int"
-                        },
-                        "target_zone": {
-                          "value": {
-                            "value": "@pipeline().parameters.Zone",
-                            "type": "Expression"
-                          },
-                          "type": "string"
                         }
                       }
                     },
@@ -362,13 +320,6 @@
                             "type": "Expression"
                           },
                           "type": "int"
-                        },
-                        "target_zone": {
-                          "value": {
-                            "value": "@pipeline().parameters.Zone",
-                            "type": "Expression"
-                          },
-                          "type": "string"
                         }
                       }
                     },
@@ -414,13 +365,6 @@
                             "type": "Expression"
                           },
                           "type": "int"
-                        },
-                        "target_zone": {
-                          "value": {
-                            "value": "@pipeline().parameters.Zone",
-                            "type": "Expression"
-                          },
-                          "type": "string"
                         }
                       }
                     },
@@ -459,13 +403,6 @@
                       "type": "Expression"
                     },
                     "type": "int"
-                  },
-                  "target_zone": {
-                    "value": {
-                      "value": "@pipeline().parameters.Zone",
-                      "type": "Expression"
-                    },
-                    "type": "string"
                   }
                 }
               },
@@ -503,8 +440,8 @@
         "typeProperties": {
           "parameters": {},
           "waitOnCompletion": false,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "849bbdbf-8bcb-9851-4491-1e32f5774dc0",
+          "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
+          "pipelineId": "f5774dc0-1e32-4491-9851-8bcb849bbdbf",
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
@@ -518,6 +455,8 @@
           "secureOutput": false
         },
         "name": "Invoke ingest silver src",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Wait1",
@@ -543,11 +482,6 @@
         ]
       }
     ],
-    "parameters": {
-      "Zone": {
-        "type": "string"
-      }
-    },
     "variables": {
       "Var_Year": {
         "type": "Integer",

@@ -33,7 +33,7 @@ SCHEMA_DIM_DRIVERS = StructType([
     StructField("DOB", DateType(), True)
 ])
 
-df_src = spark.sql( "SELECT * FROM Lake_F1_Silver.src.Dim_Drivers" )
+df_src = spark.sql( "SELECT * FROM Lake_F1_Silver.staging.Dim_Drivers" )
 
 mappings = [
     ("driver_name_clean", "Driver_Name"),
