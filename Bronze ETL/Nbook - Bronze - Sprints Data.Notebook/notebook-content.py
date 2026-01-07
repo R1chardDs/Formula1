@@ -11,7 +11,7 @@
 
 # PARAMETERS CELL ********************
 
-Prm_Season_Year = 2021
+Prm_Season_Year = 2025
 
 # METADATA ********************
 
@@ -92,7 +92,7 @@ SCHEMA_QUALI = StructType([
 
 target_lakehouse = "Lake_F1_Bronze"
 target_workspace = "F1_Lab"
-target_schema = "stating"
+target_schema = "staging"
 
 tgt_path_race = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table_race
 tgt_path_qualy = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table_qualy
@@ -301,7 +301,7 @@ if int(Prm_Season_Year) >= 2023:
     spark_sprint_qualifying = to_spark(sprint_qualifying_pdf, SCHEMA_QUALI)
 
     #display(spark_sprint_qualifying)
-    spark_sprint_qualifying.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_qualy)
+    spark_sprint_qualifying.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_qualy)
 
 else:
     # Temporadas < 2023: F1.com no publica Sprint Qualifying. Definimos DF vacío con el schema esperado.
@@ -412,7 +412,7 @@ sprint_grid_pdf = pd.concat(all_sgrid_pdf, ignore_index=True) if all_sgrid_pdf e
 spark_sprint_grid = to_spark(sprint_grid_pdf, SCHEMA_GRID)
 
 #display(spark_sprint_grid)
-spark_sprint_grid.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_grid)
+spark_sprint_grid.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_grid)
 
 # METADATA ********************
 
@@ -539,7 +539,7 @@ sprint_results_pdf = pd.concat(all_sr_pdf, ignore_index=True) if all_sr_pdf else
 spark_sprint_results = to_spark(sprint_results_pdf, SCHEMA_RESULTS)
 
 #display(spark_sprint_results)
-spark_sprint_results.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_race)
+spark_sprint_results.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_race)
 
 # METADATA ********************
 

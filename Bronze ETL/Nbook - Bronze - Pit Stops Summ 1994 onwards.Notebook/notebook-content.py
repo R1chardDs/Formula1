@@ -279,7 +279,7 @@ else:
 
 spark_pitstops = to_spark(pitstop_pdf, SCHEMA_PITS)
 
-spark_pitstops.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+spark_pitstops.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path)
 
 # METADATA ********************
 

@@ -237,7 +237,7 @@ results_pdf = pd.concat(all_results_pdf, ignore_index=True) if all_results_pdf e
 
 spark_results = to_spark(results_pdf, SCHEMA_RESULTS)
 
-spark_results.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+spark_results.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path)
 
 #display(spark_results)
 

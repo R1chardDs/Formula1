@@ -50,7 +50,7 @@ SCHEMA_QUALI = StructType([
     StructField("season", IntegerType(), True),
 ])
 
-target_lakehouse = "Lake_F1_" + target_zone
+target_lakehouse = "Lake_F1_Bronze"
 target_workspace = "F1_Lab"
 target_schema = "staging"
 
@@ -255,7 +255,7 @@ else:
 spark_qualifying = to_spark(qualifying_pdf, SCHEMA_QUALI)
 
 #display(spark_qualifying)
-spark_qualifying.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+spark_qualifying.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path)
 
 # METADATA ********************
 

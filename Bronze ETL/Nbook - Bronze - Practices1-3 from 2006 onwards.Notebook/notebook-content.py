@@ -54,7 +54,7 @@ SCHEMA_PRACTICE = StructType([
 ])
 
 
-target_lakehouse = "Lake_F1_" + target_zone
+target_lakehouse = "Lake_F1_Bronze"
 target_workspace = "F1_Lab"
 target_schema = "staging"
 
@@ -298,7 +298,7 @@ practice1_pdf = pd.concat(all_p1_pdf, ignore_index=True) if all_p1_pdf else pd.D
 spark_practice1 = to_spark(practice1_pdf, SCHEMA_PRACTICE)
 
 #display(spark_practice1)
-spark_practice1.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_1)
+spark_practice1.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_1)
 
 # METADATA ********************
 
@@ -338,7 +338,7 @@ practice2_pdf = pd.concat(all_p2_pdf, ignore_index=True) if all_p2_pdf else pd.D
 spark_practice2 = to_spark(practice2_pdf, SCHEMA_PRACTICE)
 
 #display(spark_practice2)
-spark_practice2.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_2)
+spark_practice2.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_2)
 
 # METADATA ********************
 
@@ -372,7 +372,7 @@ practice3_pdf = pd.concat(all_p3_pdf, ignore_index=True) if all_p3_pdf else pd.D
 spark_practice3 = to_spark(practice3_pdf, SCHEMA_PRACTICE)
 
 #display(spark_practice3)
-spark_practice3.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path_3)
+spark_practice3.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_3)
 
 # METADATA ********************
 

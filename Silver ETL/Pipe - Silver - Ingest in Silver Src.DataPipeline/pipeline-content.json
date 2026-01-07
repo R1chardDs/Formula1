@@ -11,7 +11,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_All_Races_Tracks",
                 "database": "Lake_F1_Bronze"
               },
@@ -226,7 +229,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Races_Results",
                 "database": "Lake_F1_Bronze"
               },
@@ -545,8 +551,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "artifactId": "895b8adc-96b6-4c1a-ae38-eba7a2566e4e",
+                    "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
                     "rootFolder": "Tables"
                   },
                   "annotations": []
@@ -760,6 +766,8 @@
           "secureOutput": false
         },
         "name": "Old Qualy",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Race Results",
@@ -779,7 +787,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Pit_Stop",
                 "database": "Lake_F1_Bronze"
               },
@@ -1068,7 +1079,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Fast_Laps",
                 "database": "Lake_F1_Bronze"
               },
@@ -1367,7 +1381,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Qualifying",
                 "database": "Lake_F1_Bronze"
               },
@@ -1667,7 +1684,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Practices",
                 "database": "Lake_F1_Bronze"
               },
@@ -1978,7 +1998,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Sprint_Race_Results",
                 "database": "Lake_F1_Bronze"
               },
@@ -2266,7 +2289,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Sprint_Qualifying",
                 "database": "Lake_F1_Bronze"
               },
@@ -2566,7 +2592,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Sprint_Starting_Grid",
                 "database": "Lake_F1_Bronze"
               },
@@ -2809,7 +2838,10 @@
             "datasetSettings": {
               "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "dbo",
+                "schema": {
+                  "value": "@variables('Schema_BronzeData')",
+                  "type": "Expression"
+                },
                 "table": "v_Starting_Grid",
                 "database": "Lake_F1_Bronze"
               },
@@ -3045,8 +3077,8 @@
       {
         "type": "TridentNotebook",
         "typeProperties": {
-          "notebookId": "6965380f-8d3e-9a2f-4e0c-c8b8e85e94c6",
-          "workspaceId": "00000000-0000-0000-0000-000000000000"
+          "notebookId": "e85e94c6-c8b8-4e0c-9a2f-8d3e6965380f",
+          "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -3056,6 +3088,8 @@
           "secureOutput": false
         },
         "name": "Set silver Processed",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Starting Grid",

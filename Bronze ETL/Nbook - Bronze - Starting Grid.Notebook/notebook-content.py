@@ -232,7 +232,7 @@ else:
 spark_starting_grid = to_spark(starting_grid_pdf, SCHEMA_GRID)
 
 #display(spark_starting_grid)
-spark_starting_grid.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+spark_starting_grid.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path)
 
 # METADATA ********************
 

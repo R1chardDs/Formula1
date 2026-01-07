@@ -52,7 +52,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
 df_src = spark.sql(
-    "SELECT * FROM Lake_F1_Silver.src.Races_Results" 
+    "SELECT * FROM Lake_F1_Silver.staging.Races_Results" 
 )
 
 TableSchema = StructType([

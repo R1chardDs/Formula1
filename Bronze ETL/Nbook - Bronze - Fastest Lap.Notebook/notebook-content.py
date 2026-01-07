@@ -288,7 +288,7 @@ spark_fastest_laps = to_spark(fastest_laps_pdf, SCHEMA_FASTLAPS)
 
 
 #display(spark_fastest_laps)
-spark_fastest_laps.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+spark_fastest_laps.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path)
 
 # METADATA ********************
 

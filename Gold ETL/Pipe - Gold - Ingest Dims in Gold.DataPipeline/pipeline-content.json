@@ -70,6 +70,7 @@
           "secureOutput": false
         },
         "name": "Dim Positions",
+        "description": "Borre la vista Dim_Positions lol",
         "state": "Inactive",
         "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
@@ -250,93 +251,6 @@
               "type": "LakehouseTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Dim_Races"
-              },
-              "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
-              },
-              "annotations": []
-            }
-          },
-          "sink": {
-            "type": "LakehouseTableSink",
-            "tableActionOption": "OverwriteSchema",
-            "applyVOrder": true,
-            "partitionOption": "None",
-            "datasetSettings": {
-              "type": "LakehouseTable",
-              "typeProperties": {
-                "schema": "dbo",
-                "table": "Dim_Races"
-              },
-              "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Gold",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "0a2daead-ec2a-ae4e-4af7-f73d0fb46a7a",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
-              },
-              "annotations": []
-            }
-          },
-          "translator": {
-            "type": "TabularTranslator",
-            "typeConversion": true,
-            "typeConversionSettings": {
-              "allowDataTruncation": true,
-              "treatBooleanAsNumber": false
-            }
-          },
-          "enableStaging": false
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Dim Races",
-        "dependsOn": [
-          {
-            "activity": "Dim Drivers",
-            "dependencyConditions": [
-              "Completed"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "Copy",
-        "typeProperties": {
-          "source": {
-            "type": "LakehouseTableSource",
-            "datasetSettings": {
-              "type": "LakehouseTable",
-              "typeProperties": {
-                "schema": "clean",
                 "table": "Dim_Tracks"
               },
               "schema": [],
@@ -408,7 +322,7 @@
         "name": "Dim Tracks",
         "dependsOn": [
           {
-            "activity": "Dim Races",
+            "activity": "Dim Drivers",
             "dependencyConditions": [
               "Completed"
             ]

@@ -39,6 +39,8 @@ src_shecma = "staging"
 
 src_path = "abfss://" + src_workspace + "@onelake.dfs.fabric.microsoft.com/" + src_lakehouse + ".Lakehouse/Tables/" + src_shecma + "/" + src_table
 
+tgt_path_staging = "abfss://" + src_workspace + "@onelake.dfs.fabric.microsoft.com/" + src_lakehouse + ".Lakehouse/Tables/" + src_shecma + "/" + target_table
+
 df_season_races = spark.read.format("delta").load(src_path)
 df_all_races = spark.read.format("delta").load(tgt_path)
 df_all_races_to_eval = df_all_races.filter(F.col("season") == Prm_Season_Year )
@@ -89,6 +91,7 @@ df_new_races = df_season_races_new.filter(F.col("bronze") == "N" )
 
 df_season_races_new.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(src_path)
 df_new_races.write.format("delta").mode("append").option("overwriteSchema","true").save(tgt_path)
+df_new_races.write.format("delta").mode("overwrite").option("overwriteSchema","true").save(tgt_path_staging)
 
 # METADATA ********************
 
