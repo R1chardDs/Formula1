@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Ingest Bronze to Silver Manual"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "65a49bbd-6578-a85a-4bdd-aa0d6c5a981d"
+  }
+}
