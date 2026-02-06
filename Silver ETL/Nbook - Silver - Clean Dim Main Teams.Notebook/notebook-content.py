@@ -24,15 +24,18 @@
 
 from pyspark.sql import functions as F
 
-df_src = spark.sql("SELECT * FROM Lake_F1_Silver.staging.Dim_Country")
+df_src = spark.sql("SELECT * FROM Lake_F1_Silver.staging.Dim_MainTeams")
+
+Url_Default = "https://bidatasolutionsni-my.sharepoint.com/:i:/g/personal/rampie_bidatasolutionsni_onmicrosoft_com/IQA8QCOqYKuaQqp9USPGXQ-6ASOp6mdGcwpXVyPfV0J0c-4?download=1"
 
 df_Final = df_src.withColumn(
     "URL_Download",
-    F.regexp_replace(F.col("Sharepoint_Image_URL"), r"\?.*", "?download=1")
+    F.when(F.col("Img_Url").isNull(), F.lit(Url_Default)) \
+     .otherwise(F.regexp_replace(F.col("Img_Url"), r"\?.*", "?download=1"))
 )
 
 #display(df_Final)
-df_Final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("clean.Dim_Country")
+df_Final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("clean.Dim_MainTeams")
 
 # METADATA ********************
 

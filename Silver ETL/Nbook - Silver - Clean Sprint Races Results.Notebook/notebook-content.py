@@ -43,7 +43,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
 TableSchema = StructType([
-    StructField("Position", IntegerType(), True),
+    StructField("Position", StringType(), True),
     StructField("Car_Number", IntegerType(), True),
     StructField("Team", StringType(), True),
     StructField("Laps", IntegerType(), True),
@@ -152,7 +152,7 @@ target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in TableSchem
 df_final = df_out.select(*target_cols)
 
 #display(df_final)
-df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Sprint_Races_Results")
+df_final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Sprint_Races_Results")
 
 # METADATA ********************
 

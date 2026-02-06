@@ -48,13 +48,13 @@ SCHEMA_GRID = StructType([
 ])
 
 SCHEMA_RESULTS = StructType([
-    StructField("position", IntegerType(), True),
+    StructField("position", StringType(), True),
     StructField("car_number", IntegerType(), True),
     StructField("driver", StringType(), True),
     StructField("team", StringType(), True),
     StructField("laps", IntegerType(), True),
     StructField("time_or_retired", StringType(), True),
-    StructField("points", IntegerType(), True),
+    StructField("points", DoubleType(), True),
     StructField("driver_name", StringType(), True),
     StructField("driver_code", StringType(), True),
     StructField("status", StringType(), True),

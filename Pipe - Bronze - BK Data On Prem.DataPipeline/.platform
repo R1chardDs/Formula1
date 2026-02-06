@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipe - Bronze - BK Data On Prem"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fde6779b-2f68-b7c5-4a20-2fd60808e26e"
+  }
+}

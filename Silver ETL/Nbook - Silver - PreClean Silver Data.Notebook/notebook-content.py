@@ -41,13 +41,22 @@ from delta.tables import DeltaTable
 target_table = "Races_Results"
 target_lakehouse = "Lake_F1_Silver"
 target_workspace = "F1_Lab"
-target_schema = "src"
+target_schema = "staging"
 tgt_path = "abfss://" + target_workspace + "@onelake.dfs.fabric.microsoft.com/" + target_lakehouse + ".Lakehouse/Tables/" + target_schema + "/" + target_table
 
 df_RacesResults = spark.read.format("delta").load(tgt_path)
 df_PreUpdate = df_RacesResults.filter( (F.col("status") == "Finished")  & (F.col("laps").isNull()) & (F.col("time_or_retired").isNull())  )
 
 display(df_PreUpdate)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 dt = DeltaTable.forPath(spark, tgt_path)
 

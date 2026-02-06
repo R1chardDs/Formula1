@@ -1,0 +1,139 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "SqlServerSource",
+            "sqlReaderQuery": "SELECT \n    s.name AS schema_name,\n    t.name AS table_name\nFROM sys.tables t\nINNER JOIN sys.schemas s ON t.schema_id = s.schema_id\nWHERE s.name IN ('dbo' )",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "SqlServerTable",
+            "typeProperties": {
+              "database": "lake_f1_gold"
+            },
+            "schema": [],
+            "externalReferences": {
+              "connection": "800b75ba-d644-4bb9-ad7c-78156839e762"
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Lookup1",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup1').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "LakehouseTableSource",
+                  "datasetSettings": {
+                    "type": "LakehouseTable",
+                    "typeProperties": {
+                      "schema": {
+                        "value": "@item().schema_name",
+                        "type": "Expression"
+                      },
+                      "table": {
+                        "value": "@item().table_name",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "connectionSettings": {
+                      "name": "Lake_F1_Gold",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "0a2daead-ec2a-ae4e-4af7-f73d0fb46a7a",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Tables"
+                        },
+                        "externalReferences": {
+                          "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "SqlServerSink",
+                  "tableOption": "autoCreate",
+                  "sqlWriterUseTableLock": true,
+                  "writeBehavior": "insert",
+                  "datasetSettings": {
+                    "type": "SqlServerTable",
+                    "typeProperties": {
+                      "schema": {
+                        "value": "@item().schema_name",
+                        "type": "Expression"
+                      },
+                      "table": {
+                        "value": "@item().table_name",
+                        "type": "Expression"
+                      },
+                      "database": "F1_Lake_Gold"
+                    },
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "3796b692-f99b-4c3f-b9ad-8b3442fdb50e"
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Copy data1",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "ForEach1",
+        "dependsOn": [
+          {
+            "activity": "Lookup1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

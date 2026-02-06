@@ -28,9 +28,9 @@
 
 # MAGIC %%sql
 # MAGIC 
-# MAGIC CREATE TABLE Races_Results_BK
+# MAGIC CREATE TABLE Sprint_Race_Results_BK
 # MAGIC AS
-# MAGIC SELECT * FROM Races_Results
+# MAGIC SELECT * FROM Sprint_Race_Results
 
 # METADATA ********************
 
@@ -41,7 +41,7 @@
 
 # CELL ********************
 
-spark.conf.set('spark.sql.caseSensitive', True)
+#spark.conf.set('spark.sql.caseSensitive', True)
 
 print(spark.conf.get('spark.sql.caseSensitive'))
 
@@ -54,11 +54,24 @@ print(spark.conf.get('spark.sql.caseSensitive'))
 
 # CELL ********************
 
+# MAGIC %%sql
+# MAGIC 
+# MAGIC DROP TABLE Sprint_Race_Results
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 from pyspark.sql.types import (
     StructType, StructField, IntegerType, StringType, DoubleType
 )
 
-# 1) Definir el esquema correcto
+
 SCHEMA_RESULTS = StructType([
     StructField("position", IntegerType(), True),
     StructField("car_number", IntegerType(), True),
@@ -66,7 +79,7 @@ SCHEMA_RESULTS = StructType([
     StructField("team", StringType(), True),
     StructField("laps", IntegerType(), True),
     StructField("time_or_retired", StringType(), True),
-    StructField("points", DoubleType(), True),   # ← ahora Double
+    StructField("points", DoubleType(), True),
     StructField("driver_name", StringType(), True),
     StructField("driver_code", StringType(), True),
     StructField("status", StringType(), True),
@@ -84,7 +97,7 @@ SCHEMA_RESULTS = StructType([
 empty_df = spark.createDataFrame([], SCHEMA_RESULTS)
 
 # 3) Guardar como tabla vacía en el Lakehouse (ajusta ruta/nombre según corresponda)
-target_path = "abfss://F1_Lab@onelake.dfs.fabric.microsoft.com/Lake_F1_Bronze.Lakehouse/Tables/dbo/Races_Results"
+target_path = "abfss://F1_Lab@onelake.dfs.fabric.microsoft.com/Lake_F1_Bronze.Lakehouse/Tables/dbo/Sprint_Race_Results"
 
 (empty_df.write
     .format("delta")
@@ -103,8 +116,9 @@ target_path = "abfss://F1_Lab@onelake.dfs.fabric.microsoft.com/Lake_F1_Bronze.La
 # CELL ********************
 
 # MAGIC %%sql
-# MAGIC INSERT INTO Races_Results
-# MAGIC SELECT * FROM Races_Results_BK
+# MAGIC 
+# MAGIC INSERT INTO Sprint_Race_Results
+# MAGIC SELECT * FROM Sprint_Race_Results_BK
 
 # METADATA ********************
 

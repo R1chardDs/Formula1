@@ -49,3 +49,30 @@ bk_Season_Races.write.format("delta").mode("overwrite").option("overwriteSchema"
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC INSERT INTO Lake_F1_Bronze.dbo.Races_Results
+# MAGIC SELECT * FROM (
+# MAGIC     SELECT * FROM Lake_F1_Bronze.staging.Races_Results_FixedPoints
+# MAGIC )
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC DELETE FROM Lake_F1_Bronze.dbo.Races_Results
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }

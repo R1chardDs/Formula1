@@ -30,8 +30,11 @@ SCHEMA_DIM_DRIVERS = StructType([
     StructField("Nationality", StringType(), True),
     StructField("LastSeason", IntegerType(), True),
     StructField("FirstSeason", IntegerType(), True),
-    StructField("DOB", DateType(), True)
+    StructField("DOB", DateType(), True),
+    StructField("Img_Url", StringType(), True),
 ])
+
+Url_Default = "https://bidatasolutionsni-my.sharepoint.com/:i:/g/personal/rampie_bidatasolutionsni_onmicrosoft_com/IQAMN2z3fVUvQ4ezSYMpXWhHAVyHNlOJd_etC_0TlojYbok?download=1"
 
 df_src = spark.sql( "SELECT * FROM Lake_F1_Silver.staging.Dim_Drivers" )
 
@@ -40,16 +43,23 @@ mappings = [
     ("Nationality", "Nationality"),
     ("LastSeason", "LastSeason"),
     ("FirstSeason", "FirstSeason"),
-    ("DOB", "DOB")
+    ("DOB", "DOB"),
+    ("Img_Url","Img_Url")
 ]
 
 df_out = df_src.select([F.col(src).alias(dst) for src, dst in mappings])
 
 target_cols = [ F.col(f.name).cast(f.dataType).alias(f.name) for f in SCHEMA_DIM_DRIVERS.fields ]
-df_final = df_out.select(*target_cols)
+df_final_src = df_out.select(*target_cols)
 
-#display(df_final)
-df_final.write.format("delta").mode("overwrite").saveAsTable("Lake_F1_Silver.clean.Dim_Drivers")
+df_Final = df_final_src.withColumn(
+    "URL_Download",
+    F.when(F.col("Img_Url").isNull(), F.lit(Url_Default)) \
+     .otherwise(F.regexp_replace(F.col("Img_Url"), r"\?.*", "?download=1"))
+)
+
+#display(df_Final)
+df_Final.write.format("delta").mode("overwrite").option("overwriteschema","true").saveAsTable("Lake_F1_Silver.clean.Dim_Drivers")
 
 # METADATA ********************
 
