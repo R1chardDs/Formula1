@@ -161,9 +161,9 @@
       {
         "type": "Wait",
         "typeProperties": {
-          "waitTimeInSeconds": 10
+          "waitTimeInSeconds": 15
         },
-        "name": "Wait 10 segs 2",
+        "name": "Wait 15",
         "dependsOn": [
           {
             "activity": "ForEach1",
@@ -197,7 +197,7 @@
         "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
-            "activity": "Wait 10 segs 2",
+            "activity": "Wait 15",
             "dependencyConditions": [
               "Succeeded"
             ]

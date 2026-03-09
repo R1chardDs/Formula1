@@ -5,28 +5,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Fast_Laps"
+                "table": "v_New_Fast_Laps",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -92,28 +83,17 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "None",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
-                "schema": "clean",
-                "table": "Old_Qualifying"
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -135,8 +115,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "0a2daead-ec2a-ae4e-4af7-f73d0fb46a7a",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "artifactId": "0fb46a7a-f73d-4af7-ae4e-ec2a0a2daead",
+                    "workspaceId": "265d92f7-0795-4b79-b272-0e06281c49c5",
                     "rootFolder": "Tables"
                   },
                   "externalReferences": {
@@ -166,6 +146,8 @@
           "secureOutput": false
         },
         "name": "Old Qualy",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Fast Laps",
@@ -179,28 +161,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Pit_Stops"
+                "table": "v_New_Pit_Stops",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -266,28 +239,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Practices"
+                "table": "v_New_Practices",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -353,28 +317,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Qualifying"
+                "table": "v_New_Qualifying",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -440,28 +395,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Races_Notes"
+                "table": "Races_Notes",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -527,28 +473,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Races_Results"
+                "table": "v_New_Races_Results",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -614,28 +551,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Sprint_Qualifying"
+                "table": "v_New_Sprint_Qualifying",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -701,28 +629,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Sprint_Races_Results"
+                "table": "v_New_Sprint_Races_Results",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -788,28 +707,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Sprint_Starting_Grid"
+                "table": "v_New_Sprint_Starting_Grid",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -875,28 +785,19 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Starting_Grid"
+                "table": "v_New_Starting_Grid",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
@@ -985,36 +886,25 @@
         "type": "Copy",
         "typeProperties": {
           "source": {
-            "type": "LakehouseTableSource",
+            "type": "AzureSqlSource",
+            "partitionOption": "None",
+            "isolationLevel": "ReadCommitted",
             "datasetSettings": {
-              "type": "LakehouseTable",
+              "type": "AzureSqlTable",
               "typeProperties": {
                 "schema": "clean",
-                "table": "Dim_Races"
+                "table": "v_New_Dim_Races",
+                "database": "lake_f1_silver"
               },
               "schema": [],
-              "connectionSettings": {
-                "name": "Lake_F1_Silver",
-                "properties": {
-                  "type": "Lakehouse",
-                  "typeProperties": {
-                    "artifactId": "a2566e4e-eba7-ae38-4c1a-96b6895b8adc",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
-                    "rootFolder": "Tables"
-                  },
-                  "externalReferences": {
-                    "connection": "a097dd37-a816-4406-9a09-fcdde657281c"
-                  },
-                  "annotations": []
-                }
+              "externalReferences": {
+                "connection": "9d45f58b-0812-4371-9a7e-7e000a78aec3"
               },
               "annotations": []
             }
           },
           "sink": {
-            "type": "LakehouseTableSink",
-            "tableActionOption": "Append",
-            "applyVOrder": true,
+            "type": "AzureSqlSink",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {

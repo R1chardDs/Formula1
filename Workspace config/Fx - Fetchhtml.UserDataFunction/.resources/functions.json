@@ -22,7 +22,9 @@
         "fabricFunctionParameters": [
           {
             "name": "url",
-            "dataType": "str"
+            "dataType": "str",
+            "hasDefaultValue": false,
+            "defaultValue": null
           }
         ]
       }

@@ -76,7 +76,7 @@ spark.sql(query)
 
 # MAGIC %%sql
 # MAGIC 
-# MAGIC DELETE FROM Lake_F1_Bronze.dbo.All_Races WHERE race_id = 1276
+# MAGIC DELETE FROM Lake_F1_Bronze.dbo.All_Races WHERE season = 2026
 
 # METADATA ********************
 
