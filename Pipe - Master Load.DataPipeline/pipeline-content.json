@@ -45,7 +45,7 @@
         "name": "Pipe - Bronze - Process Data",
         "dependsOn": [
           {
-            "activity": "Pipe - Bronze - All Races URL",
+            "activity": "RefreshBronze",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -74,7 +74,7 @@
         "name": "Pipe - Bronze - Staging to dbo",
         "dependsOn": [
           {
-            "activity": "Pipe - Bronze - Process Data",
+            "activity": "RefreshBronze2",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -161,13 +161,7 @@
         "name": "Pipe - Silver - Clean Src Data",
         "dependsOn": [
           {
-            "activity": "Pipe - Silver - Ingest Dims in Silver Src",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          },
-          {
-            "activity": "Pipe - Silver - Ingest in Silver Src",
+            "activity": "RefreshSilver",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -223,6 +217,120 @@
           "secureOutput": false
         },
         "name": "Pipe - Gold - Ingest Dims in Gold",
+        "dependsOn": [
+          {
+            "activity": "RefreshSilver2",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshSqlEndpoint",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "sqlEndpointId": "2d067bfd-6b41-49cd-8a31-e5dd82874b43",
+          "recreateTables": false
+        },
+        "externalReferences": {
+          "connection": "143d457d-e5fb-4b87-885e-9523e29c138f"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "RefreshBronze",
+        "dependsOn": [
+          {
+            "activity": "Pipe - Bronze - All Races URL",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshSqlEndpoint",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "sqlEndpointId": "2d067bfd-6b41-49cd-8a31-e5dd82874b43",
+          "recreateTables": false
+        },
+        "externalReferences": {
+          "connection": "143d457d-e5fb-4b87-885e-9523e29c138f"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "RefreshBronze2",
+        "dependsOn": [
+          {
+            "activity": "Pipe - Bronze - Process Data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshSqlEndpoint",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "sqlEndpointId": "4251dc52-1ceb-4808-ad3d-0284efdeca28",
+          "recreateTables": false
+        },
+        "externalReferences": {
+          "connection": "143d457d-e5fb-4b87-885e-9523e29c138f"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "RefreshSilver",
+        "dependsOn": [
+          {
+            "activity": "Pipe - Silver - Ingest in Silver Src",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          },
+          {
+            "activity": "Pipe - Silver - Ingest Dims in Silver Src",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshSqlEndpoint",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "sqlEndpointId": "4251dc52-1ceb-4808-ad3d-0284efdeca28",
+          "recreateTables": false
+        },
+        "externalReferences": {
+          "connection": "143d457d-e5fb-4b87-885e-9523e29c138f"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "RefreshSilver2",
         "dependsOn": [
           {
             "activity": "Pipe - Silver - Clean Src Data",
